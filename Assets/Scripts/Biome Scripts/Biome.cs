@@ -1,15 +1,29 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿
+/// <summary>
+/// Base Biome Class
+/// </summary>
+public class Biome {
 
-public class Biome : MonoBehaviour {
+    //Public
+    public enum BiomeTypes
+    {
+        Woodland,
+        Mountians,
+        Tropical,
+        Arctic
+    };
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public BiomeTypes myBiome;
+
+    //Private
+    
+    
+    //Constructor
+    public Biome(BiomeTypes setBiome)
+    {
+        //Set all of our data here
+        myBiome = setBiome;
+    }
+
+    //Functions
 }
