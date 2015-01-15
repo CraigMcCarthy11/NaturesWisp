@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        test = new Biome(Biome.BiomeTypes.Mountians);
+        test = new Biome(Biome.BiomeTypes.Arctic, Faction.FactionTypes.ArcticFaction, );
 	}
 	
 	// Update is called once per frame

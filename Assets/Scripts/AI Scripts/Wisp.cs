@@ -3,13 +3,16 @@ using System.Collections;
 
 public class Wisp : MonoBehaviour {
 
-	// Use this for initialization
 	void Start () {
-	
+        SpawnSelf();
 	}
 	
-	// Update is called once per frame
 	void Update () {
 	
 	}
+
+    public void SpawnSelf()
+    {
+
+    }
 }

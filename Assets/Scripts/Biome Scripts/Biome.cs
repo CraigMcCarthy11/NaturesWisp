@@ -13,6 +13,7 @@ public class Biome {
         Arctic
     };
 
+    //My Data
     public BiomeTypes myBiome;
     public Faction.FactionTypes myFaction;
 
