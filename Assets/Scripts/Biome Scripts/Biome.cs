@@ -2,9 +2,8 @@
 /// <summary>
 /// Base Biome Class
 /// </summary>
-public class Biome {
-
-    //Public
+public class Biome 
+{
     public enum BiomeTypes
     {
         Woodland,
@@ -20,7 +19,6 @@ public class Biome {
     //Private
     private int numberOfStartingWisps;
     
-    //Constructor
     public Biome(BiomeTypes setBiome, Faction.FactionTypes setFaction, int setStartingWisps)
     {
         //Set all of our data here
@@ -28,11 +26,8 @@ public class Biome {
         myFaction = setFaction;
         numberOfStartingWisps = setStartingWisps;
 
-
         BuildWithData();
     }
-
-    //Functions
 
     /// <summary>
     /// This method will actually create the game object in the screen. 

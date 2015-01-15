@@ -9,7 +9,6 @@ public class TileMapInspector : Editor {
     {
         //base.OnInspectorGUI();
         DrawDefaultInspector();
-
         if (GUILayout.Button("Regenerate TileMap In Editor"))
         {
             TileMap tileMap = (TileMap)target;
