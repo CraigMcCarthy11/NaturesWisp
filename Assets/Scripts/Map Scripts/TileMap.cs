@@ -11,6 +11,7 @@ public class TileMap : MonoBehaviour
     public int size_x = 100;
     public int size_z = 50;
     public float tileSize = 1.0f;
+    public Vector2 gridSquareSize = new Vector2(5, 5);
 
     // Use this for initialization
     void Start()
@@ -20,8 +21,9 @@ public class TileMap : MonoBehaviour
 
     void BuildTexture()
     {
-        int textureWidth = 10;
-        int textureHeight = 10;
+        int textureWidth = (int)gridSquareSize.x;
+        int textureHeight = (int)gridSquareSize.y;
+
         Texture2D texture = new Texture2D(textureWidth, textureHeight);
 
         //Sets the texture to each tile
