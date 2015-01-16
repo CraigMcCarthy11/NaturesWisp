@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public class Biome
+public class Biome : MonoBehaviour
 {
+    public static int BiomesOfThisType = 0;
+
     public enum BiomeTypes
     {
         Woodland,
@@ -20,7 +21,7 @@ public class Biome
     private int numberOfStartingWisps;
     
     //Constructor
-    public Biome(BiomeTypes setBiome, Faction.FactionTypes setFaction, int setStartingWisps, int setHealth)
+    public void Initalize(BiomeTypes setBiome, Faction.FactionTypes setFaction, int setStartingWisps, int setHealth)
     {
         //Set all of our data here
         health = setHealth;

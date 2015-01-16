@@ -29,6 +29,8 @@ public class Wisp : MonoBehaviour {
         Everything
     };
 
+    public Want currentWant;
+
     public void Initalize()
     {
 

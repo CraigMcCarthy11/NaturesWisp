@@ -4,8 +4,10 @@ using System.Collections;
 public class UsefulPrefabs : MonoBehaviour
 {
     private static UsefulPrefabs gInstance;
-
-    //MUH PREFABS!!!!!
+    
+    //Scripts
+    public GameManager gameManager;
+    //MUH PREFABS!!!!
     public GameObject MapAnchor;
 
     /// <summary>

@@ -1,5 +1,8 @@
-﻿public class Faction {
+﻿using UnityEngine;
+using System.Collections;
 
+public class Faction : MonoBehaviour
+{
 	//Public
     public enum FactionTypes
     {
