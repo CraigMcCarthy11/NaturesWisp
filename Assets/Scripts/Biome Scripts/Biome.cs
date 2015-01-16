@@ -1,8 +1,7 @@
-﻿
-/// <summary>
-/// Base Biome Class
-/// </summary>
-public class Biome 
+﻿using UnityEngine;
+using System.Collections;
+
+public class Biome
 {
     public enum BiomeTypes
     {
@@ -12,16 +11,19 @@ public class Biome
         Arctic
     };
 
-    //My Data
+    //Public
     public BiomeTypes myBiome;
     public Faction.FactionTypes myFaction;
+    public int health;
 
     //Private
     private int numberOfStartingWisps;
     
-    public Biome(BiomeTypes setBiome, Faction.FactionTypes setFaction, int setStartingWisps)
+    //Constructor
+    public Biome(BiomeTypes setBiome, Faction.FactionTypes setFaction, int setStartingWisps, int setHealth)
     {
         //Set all of our data here
+        health = setHealth;
         myBiome = setBiome;
         myFaction = setFaction;
         numberOfStartingWisps = setStartingWisps;

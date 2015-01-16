@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
     public Biome test;
+    public static List<GameObject> MapAnchors = new List<GameObject>();
     
 
 	// Use this for initialization
@@ -16,4 +18,9 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void GenerateBiomeData()
+    {
+
+    }
 }

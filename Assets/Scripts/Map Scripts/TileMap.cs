@@ -143,6 +143,7 @@ public class TileMap : MonoBehaviour
             {
                 XposToSpawn = gridSizeGameWorld_x / tileSize + XposToSpawn;
                 int setToMiddleX = size_x / 2;
+                //Add our finished pos to the list of object to be spawned
                 objsToSpawn.Add(new Vector3(XposToSpawn - setToMiddleX,1,YposToSpawn / 2));
             }
             //Completed a row, move up by one
@@ -152,11 +153,17 @@ public class TileMap : MonoBehaviour
             XposToSpawn = 0;
         }
 
-        //Spawn Objects
+        //Spawn Anchors
         foreach (Vector3 pos in objsToSpawn)
         {
-            GameObject anchor = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            //Rename 
+            GameObject anchor = new GameObject(pos.ToString());
+            //Parent it in the inspector
+            anchor.transform.parent = UsefulPrefabs.instance.MapAnchor.transform;
+            //Set its corrent pos
             anchor.transform.position = pos;
+
+            //TODO: Rename it and set data
         }
     }
 

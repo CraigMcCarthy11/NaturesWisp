@@ -6,7 +6,7 @@ public class UsefulPrefabs : MonoBehaviour
     private static UsefulPrefabs gInstance;
 
     //MUH PREFABS!!!!!
-    public GameObject testGO;
+    public GameObject MapAnchor;
 
     /// <summary>
     /// Constructor that handles getting ang setting the instaance
