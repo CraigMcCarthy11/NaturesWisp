@@ -4,7 +4,7 @@
     public enum FactionTypes
     {
         WoodlandFaction,
-        MountiansFaction,
+        DesertFaction,
         TropicalFaction,
         ArcticFaction
     };
@@ -22,7 +22,4 @@
         myFaction = setFaction;
 
     }*/
-
-    //Functions
-    
 }

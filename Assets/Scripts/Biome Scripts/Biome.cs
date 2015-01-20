@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Biome : MonoBehaviour
 {
     public enum BiomeTypes
     {
         Woodland,
-        Mountians,
+        Desert,
         Tropical,
         Arctic
     };
@@ -17,18 +19,20 @@ public class Biome : MonoBehaviour
     public int health;
 
     //Private
+    [SerializeField]
     private int numberOfStartingWisps;
-    
-    //Constructor
-    public void Init(BiomeTypes setBiome, Faction.FactionTypes setFaction, int setStartingWisps, int setHealth)
-    {
-        //Set all of our data here
-        health = setHealth;
-        myBiome = setBiome;
-        myFaction = setFaction;
-        numberOfStartingWisps = setStartingWisps;
+    private System.Random rand = new System.Random();
+    private int MAX_STARTING_WISPS = 8;
+    private int MIN_STARTING_WISPS = 4;
+    private int MAX_STARTING_HEALTH = 110;
+    private int MIN_STARTING_HEALTH = 80;
 
-        BuildWithData();
+    public void GenerateBiomeData()
+    {
+        myBiome = RandomEnum<BiomeTypes>();
+        myFaction = RandomEnum<Faction.FactionTypes>();
+        numberOfStartingWisps = UnityEngine.Random.Range(MIN_STARTING_WISPS, MAX_STARTING_HEALTH);
+        health = UnityEngine.Random.Range(MIN_STARTING_HEALTH, MAX_STARTING_HEALTH);
     }
 
     /// <summary>
@@ -39,5 +43,11 @@ public class Biome : MonoBehaviour
     private void BuildWithData()
     {
 
+    }
+
+    public T RandomEnum<T>()
+    {
+        T[] values = (T[])Enum.GetValues(typeof(T));
+        return values[rand.Next(0, values.Length)];
     }
 }
