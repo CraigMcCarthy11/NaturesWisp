@@ -4,9 +4,11 @@ using System.Collections;
 public class UsefulPrefabs : MonoBehaviour
 {
     private static UsefulPrefabs gInstance;
-
-    //MUH PREFABS!!!!!
-    public GameObject testGO;
+    
+    //Scripts
+    public GameManager gameManager;
+    //MUH PREFABS!!!!
+    public GameObject MapAnchor;
 
     /// <summary>
     /// Constructor that handles getting ang setting the instaance

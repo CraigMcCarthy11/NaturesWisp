@@ -1,27 +1,32 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
+using System.Collections.Generic;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(MeshCollider))]
 public class TileMap : MonoBehaviour
 {
-
     public int size_x = 100;
     public int size_z = 50;
     public float tileSize = 1.0f;
+    public Vector2 gridSquareSize = new Vector2(5, 5); //Whole Numbers only! Also, use same numbers in you want equal colors to line up with verts
+    
+
 
     // Use this for initialization
     void Start()
     {
-        BuildMesh();
+        //BuildMesh();
     }
 
-    void BuildTexture()
+    public void BuildTexture()
     {
-        int textureWidth = 10;
-        int textureHeight = 10;
+        int textureWidth = (int)gridSquareSize.x;
+        int textureHeight = (int)gridSquareSize.y;
+
         Texture2D texture = new Texture2D(textureWidth, textureHeight);
 
         //Sets the texture to each tile
@@ -29,7 +34,7 @@ public class TileMap : MonoBehaviour
         {
             for( int x = 0; x < textureWidth; x++){
                 //Randomly generate a color and set it
-                Color color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f)); 
+                Color color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
                 texture.SetPixel(x, y, color);
             }
         }
@@ -44,11 +49,12 @@ public class TileMap : MonoBehaviour
         mesh_renderer.sharedMaterials[0].mainTexture = texture;
 
         Debug.Log("Done Texture");
+
+        //CalclateGridCenterPoints();
     }
 
     public void BuildMesh()
     {
-
         int numTiles = size_x * size_z;
         int numTris = numTiles * 2;
 
@@ -113,12 +119,57 @@ public class TileMap : MonoBehaviour
         //Points to an existing mesh
         mesh_collider.sharedMesh = mesh;
 
-        //Recalculates normals for lighting purposes.. I think
+        //Recalculates normals for lighting purposes... I think
         mesh.RecalculateNormals();
         Debug.Log("Done Mesh");
 
-        BuildTexture();
+        //BuildTexture();
 
+    }
+
+    public void CalclateGridCenterPoints()
+    {
+        int gridSizeGameWorld_x, gridSizeGameWorld_y;
+        gridSizeGameWorld_x = (int)tileSize * size_x;
+        gridSizeGameWorld_y = (int)tileSize * size_z;
+        List<Vector3> objsToSpawn = new List<Vector3>();
+
+        float XposToSpawn = 0f;
+        float YposToSpawn = gridSizeGameWorld_y / tileSize;
+        for (int i = 0; i < tileSize; i++)
+        {
+            //Looping through each X Square
+            for (int j = 0; j < tileSize; j++)
+            {
+                XposToSpawn = gridSizeGameWorld_x / tileSize + XposToSpawn;
+                int setToMiddleX = size_x / 2;
+                //Add our finished pos to the list of object to be spawned
+                objsToSpawn.Add(new Vector3(XposToSpawn - setToMiddleX,1,YposToSpawn / 2));
+            }
+            //Completed a row, move up by one
+            YposToSpawn = gridSizeGameWorld_y / tileSize + YposToSpawn;
+            YposToSpawn = YposToSpawn / 2;
+            YposToSpawn = gridSizeGameWorld_y / tileSize + YposToSpawn + YposToSpawn;
+            XposToSpawn = 0;
+        }
+
+        //Spawn Anchors
+
+        foreach (Vector3 pos in objsToSpawn)
+        {
+            //Rename 
+            GameObject anchor = new GameObject(pos.ToString());
+            //Parent it in the inspector
+            anchor.transform.parent = UsefulPrefabs.instance.MapAnchor.transform;
+            //Set its corrent pos
+            anchor.transform.position = pos;
+
+            //TODO: Rename it and set data
+
+            //Add it as a knowen biome
+            GameManager.MapAnchors.Add(anchor);
+        }
+        
     }
 
 

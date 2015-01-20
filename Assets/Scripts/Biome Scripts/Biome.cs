@@ -1,10 +1,9 @@
-﻿
-/// <summary>
-/// Base Biome Class
-/// </summary>
-public class Biome {
+﻿using UnityEngine;
+using System.Collections;
+public class Biome : MonoBehaviour
+{
+    public static int BiomesOfThisType = 0;
 
-    //Public
     public enum BiomeTypes
     {
         Woodland,
@@ -13,25 +12,25 @@ public class Biome {
         Arctic
     };
 
-    //My Data
+    //Public
     public BiomeTypes myBiome;
     public Faction.FactionTypes myFaction;
+    public int health;
 
     //Private
     private int numberOfStartingWisps;
     
     //Constructor
-    public Biome(BiomeTypes setBiome, Faction.FactionTypes setFaction, int setStartingWisps)
+    public void Initalize(BiomeTypes setBiome, Faction.FactionTypes setFaction, int setStartingWisps, int setHealth)
     {
         //Set all of our data here
+        health = setHealth;
         myBiome = setBiome;
         myFaction = setFaction;
         numberOfStartingWisps = setStartingWisps;
 
         BuildWithData();
     }
-
-    //Functions
 
     /// <summary>
     /// This method will actually create the game object in the screen. 

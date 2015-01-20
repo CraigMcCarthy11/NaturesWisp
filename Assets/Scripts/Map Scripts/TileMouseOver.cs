@@ -28,7 +28,7 @@ public class TileMouseOver : MonoBehaviour
             //Sets the floats to ints
             int x = Mathf.FloorToInt(hitInfo.point.x / tileMap.tileSize);
             int z = Mathf.FloorToInt(hitInfo.point.z / tileMap.tileSize);
-            Debug.Log("Tile: " + x + " , " + z);
+            //Debug.Log("Tile: " + x + " , " + z);
 
             currentTileCoordinate.x = x;
             currentTileCoordinate.z = z;
