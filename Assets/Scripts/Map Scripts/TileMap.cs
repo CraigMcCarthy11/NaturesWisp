@@ -19,10 +19,10 @@ public class TileMap : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //BuildMesh();
+        BuildMesh();
     }
 
-    public void BuildTexture()
+    void BuildTexture()
     {
         int textureWidth = (int)gridSquareSize.x;
         int textureHeight = (int)gridSquareSize.y;
@@ -50,7 +50,7 @@ public class TileMap : MonoBehaviour
 
         Debug.Log("Done Texture");
 
-        //CalclateGridCenterPoints();
+        CalclateGridCenterPoints();
     }
 
     public void BuildMesh()
@@ -123,7 +123,7 @@ public class TileMap : MonoBehaviour
         mesh.RecalculateNormals();
         Debug.Log("Done Mesh");
 
-        //BuildTexture();
+        BuildTexture();
 
     }
 
@@ -154,7 +154,6 @@ public class TileMap : MonoBehaviour
         }
 
         //Spawn Anchors
-
         foreach (Vector3 pos in objsToSpawn)
         {
             //Rename 
@@ -165,11 +164,7 @@ public class TileMap : MonoBehaviour
             anchor.transform.position = pos;
 
             //TODO: Rename it and set data
-
-            //Add it as a knowen biome
-            GameManager.MapAnchors.Add(anchor);
         }
-        
     }
 
 

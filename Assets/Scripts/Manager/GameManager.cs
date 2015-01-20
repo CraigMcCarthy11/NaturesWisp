@@ -4,41 +4,23 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
+    public Biome test;
     public static List<GameObject> MapAnchors = new List<GameObject>();
+    
 
-    public enum BiomeTypes
-    {
-        Woodland,
-        Mountians,
-        Tropical,
-        Arctic
-    };
+	// Use this for initialization
+	void Start () {
 
-    public TileMap tileMap;
+        //test = new Biome(Biome.BiomeTypes.Arctic, Faction.FactionTypes.ArcticFaction, );
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
 
-    private int maxBiomeTypes = 8;
-
-    void Start()
-    {
-        GenerateGame();
-    }
-
-    public void GenerateGame()
-    {
-        tileMap.BuildMesh();
-        tileMap.BuildTexture();
-        tileMap.CalclateGridCenterPoints();
-        GenerateBiomePieces();
-    }
-
-    public void GenerateBiomePieces()
+    public void GenerateBiomeData()
     {
 
-
-        foreach (GameObject anchor in MapAnchors)
-        {
-            //anchor.AddComponent<Biome>();
-
-        }
     }
 }
