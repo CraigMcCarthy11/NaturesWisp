@@ -15,12 +15,13 @@
     
     
     //Constructor
+    /*
     public Faction(FactionTypes setFaction)
     {
         //Set all of our data here
         myFaction = setFaction;
 
-    }
+    }*/
 
     //Functions
     

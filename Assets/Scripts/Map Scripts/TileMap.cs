@@ -13,7 +13,7 @@ public class TileMap : MonoBehaviour
     public int size_z = 50;
     public float tileSize = 1.0f;
     public Vector2 gridSquareSize = new Vector2(5, 5); //Whole Numbers only! Also, use same numbers in you want equal colors to line up with verts
-    
+    public GameManager gameManager = UsefulPrefabs.instance.gameManager;
 
 
     // Use this for initialization
@@ -166,8 +166,7 @@ public class TileMap : MonoBehaviour
             GameObject biomePrefab = Instantiate(UsefulPrefabs.instance.BasicBiomeTesting, pos, Quaternion.identity) as GameObject;
             biomePrefab.transform.parent = anchor.transform;
 
-
-            //TODO: Rename it and set data
+            gameManager.GenerateBiomeData();
         }
     }
 

@@ -274,6 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MapAnchor: {fileID: 80752043}
   BasicBiomeTesting: {fileID: 100000, guid: 63e7654a3c1429741b51f695ae8762eb, type: 2}
+  gameManager: {fileID: 149285070}
 --- !u!114 &149285070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b15cecdc1849654097d2f14ca98ed25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: {fileID: 0}
 --- !u!4 &149285071
 Transform:
   m_ObjectHideFlags: 0
@@ -333,6 +335,7 @@ MonoBehaviour:
   size_z: 25
   tileSize: 10
   gridSquareSize: {x: 10, y: 10}
+  gameManager: {fileID: 0}
 --- !u!64 &153342918
 MeshCollider:
   m_ObjectHideFlags: 0

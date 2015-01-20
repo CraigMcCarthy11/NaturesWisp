@@ -9,6 +9,8 @@ public class UsefulPrefabs : MonoBehaviour
     public GameObject MapAnchor;
     public GameObject BasicBiomeTesting;
 
+    //Scripts
+    public GameManager gameManager;
     /// <summary>
     /// Constructor that handles getting ang setting the instaance
     /// this is using the singleton pattern

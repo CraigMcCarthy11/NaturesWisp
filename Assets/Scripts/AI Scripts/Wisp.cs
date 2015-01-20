@@ -11,7 +11,7 @@ public class Wisp : MonoBehaviour {
 
     public enum Attitude
     {
-        Scared,
+        Scared = 1,
         Aggresive,
         Neutral,
         Hostile,
@@ -29,21 +29,9 @@ public class Wisp : MonoBehaviour {
         Everything
     };
 
-    public void Initalize()
-    {
-
-    }
-
-	void Start () {
-	}
-	
-	void Update () {
-	
-	}
-
     public void SpawnSelf()
     {
-
+ 
     }
 
     private Attitude HandleAttitude()
