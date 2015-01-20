@@ -107,14 +107,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< HEAD
+<<<<<<< HEAD
   size_x: 100
   size_z: 50
   tileSize: 1
 =======
+=======
+>>>>>>> parent of ff0df70... update
   size_x: 50
   size_z: 50
   tileSize: 5
   gridSquareSize: {x: 5, y: 5}
+<<<<<<< HEAD
+>>>>>>> parent of ff0df70... update
+=======
 >>>>>>> parent of ff0df70... update
 --- !u!64 &153342918
 MeshCollider:
@@ -130,7 +136,11 @@ MeshCollider:
   m_SmoothSphereCollisions: 0
   m_Convex: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Mesh: {fileID: 1336736110}
+=======
+  m_Mesh: {fileID: 827635614}
+>>>>>>> parent of ff0df70... update
 =======
   m_Mesh: {fileID: 827635614}
 >>>>>>> parent of ff0df70... update
@@ -163,7 +173,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 432002451}
   m_GameObject: {fileID: 153342916}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Mesh: {fileID: 1336736110}
+=======
+  m_Mesh: {fileID: 827635614}
+>>>>>>> parent of ff0df70... update
 =======
   m_Mesh: {fileID: 827635614}
 >>>>>>> parent of ff0df70... update
@@ -263,11 +277,19 @@ Prefab:
       propertyPath: m_Mesh
       value: 
 <<<<<<< HEAD
+<<<<<<< HEAD
       objectReference: {fileID: 1336736110}
     - target: {fileID: 3316426, guid: 218d3606bb08c644b897edd6251b83f6, type: 2}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1336736110}
+=======
+      objectReference: {fileID: 827635614}
+    - target: {fileID: 3316426, guid: 218d3606bb08c644b897edd6251b83f6, type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 827635614}
+>>>>>>> parent of ff0df70... update
 =======
       objectReference: {fileID: 827635614}
     - target: {fileID: 3316426, guid: 218d3606bb08c644b897edd6251b83f6, type: 2}
