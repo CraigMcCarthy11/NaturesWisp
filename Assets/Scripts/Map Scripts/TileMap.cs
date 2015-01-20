@@ -156,12 +156,16 @@ public class TileMap : MonoBehaviour
         //Spawn Anchors
         foreach (Vector3 pos in objsToSpawn)
         {
-            //Rename 
+            //Create 
             GameObject anchor = new GameObject(pos.ToString());
             //Parent it in the inspector
             anchor.transform.parent = UsefulPrefabs.instance.MapAnchor.transform;
             //Set its corrent pos
             anchor.transform.position = pos;
+
+            GameObject biomePrefab = Instantiate(UsefulPrefabs.instance.BasicBiomeTesting, pos, Quaternion.identity) as GameObject;
+            biomePrefab.transform.parent = anchor.transform;
+
 
             //TODO: Rename it and set data
         }

@@ -7,6 +7,7 @@ public class UsefulPrefabs : MonoBehaviour
 
     //MUH PREFABS!!!!!
     public GameObject MapAnchor;
+    public GameObject BasicBiomeTesting;
 
     /// <summary>
     /// Constructor that handles getting ang setting the instaance
