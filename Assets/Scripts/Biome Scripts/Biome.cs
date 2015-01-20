@@ -28,7 +28,6 @@ public class Biome {
         myFaction = setFaction;
         numberOfStartingWisps = setStartingWisps;
 
-
         BuildWithData();
     }
 
