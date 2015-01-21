@@ -6,12 +6,18 @@ public class Wisp : MonoBehaviour {
 
     public Faction.FactionTypes faction;
     public int health;
-    public List<Faction.FactionTypes> Enemies = new List<Faction.FactionTypes>(); 
-    public List<Faction.FactionTypes> Allies = new List<Faction.FactionTypes>();
+
+    public struct currentState
+    {
+        public Attitude myAttitude;
+        public Want myWant;
+    }
+
+    public currentState myState;
 
     public enum Attitude
     {
-        Scared = 1,
+        Scared,
         Aggresive,
         Neutral,
         Hostile,
@@ -23,16 +29,11 @@ public class Wisp : MonoBehaviour {
     {
         Nothing,
         Woodland,
-        Mountians,
+        Desert,
         Tropical,
         Arctic,
         Everything
     };
-
-    public void SpawnSelf()
-    {
- 
-    }
 
     private Attitude HandleAttitude()
     {

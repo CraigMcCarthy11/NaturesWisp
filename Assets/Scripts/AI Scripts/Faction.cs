@@ -1,25 +1,28 @@
-﻿public class Faction {
+﻿using System.Collections.Generic;
+
+public class Faction {
 
 	//Public
     public enum FactionTypes
     {
-        WoodlandFaction,
-        DesertFaction,
-        TropicalFaction,
-        ArcticFaction
+        Woodland,
+        Desert,
+        Tropical,
+        Arctic
     };
 
     public FactionTypes myFaction;
+    public List<FactionTypes> Enemies = new List<FactionTypes>();
+    public List<FactionTypes> Allies = new List<FactionTypes>();
 
     //Private
     
     
     //Constructor
-    /*
-    public Faction(FactionTypes setFaction)
+    public Faction(FactionTypes faction, List<Faction.FactionTypes> setEnemies, List<Faction.FactionTypes> setAllies)
     {
-        //Set all of our data here
-        myFaction = setFaction;
-
-    }*/
+        Enemies = setEnemies;
+        Allies = setAllies;
+        myFaction = faction;
+    }
 }

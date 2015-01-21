@@ -19,8 +19,7 @@ public class Biome : MonoBehaviour
     public int health;
 
     //Private
-    [SerializeField]
-    private int numberOfStartingWisps;
+    public int numberOfStartingWisps;
     private System.Random rand = new System.Random();
     private int MAX_STARTING_WISPS = 8;
     private int MIN_STARTING_WISPS = 4;
@@ -30,8 +29,8 @@ public class Biome : MonoBehaviour
     public void GenerateBiomeData()
     {
         myBiome = RandomEnum<BiomeTypes>();
-        myFaction = RandomEnum<Faction.FactionTypes>();
-        numberOfStartingWisps = UnityEngine.Random.Range(MIN_STARTING_WISPS, MAX_STARTING_HEALTH);
+        myFaction = (Faction.FactionTypes)((int)myBiome); //As long as the enums are the same, type cast to an int, then set it as a enum of that type, should be the same!
+        numberOfStartingWisps = UnityEngine.Random.Range(MIN_STARTING_WISPS, MAX_STARTING_WISPS);
         health = UnityEngine.Random.Range(MIN_STARTING_HEALTH, MAX_STARTING_HEALTH);
     }
 
@@ -40,14 +39,15 @@ public class Biome : MonoBehaviour
     /// It only gets called in the constructor after we have generated all the data to build
     /// the biome
     /// </summary>
-    private void BuildWithData()
+    private void SpawnVisuals()
     {
 
     }
 
     public T RandomEnum<T>()
     {
-        T[] values = (T[])Enum.GetValues(typeof(T));
-        return values[rand.Next(0, values.Length)];
+        System.Array enumArray = System.Enum.GetValues(typeof(T));
+        T theEnum = (T)enumArray.GetValue(UnityEngine.Random.Range(0, enumArray.Length));
+        return theEnum;
     }
 }

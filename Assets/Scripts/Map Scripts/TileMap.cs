@@ -17,14 +17,7 @@ public class TileMap : MonoBehaviour
     public GameObject MapAnchor;
     public GameObject BasicBiomeTesting;
 
-
-    // Use this for initialization
-    void Start()
-    {
-        BuildMesh();
-    }
-
-    void BuildTexture()
+    public void BuildTexture()
     {
         int textureWidth = (int)gridSquareSize.x;
         int textureHeight = (int)gridSquareSize.y;
@@ -52,7 +45,7 @@ public class TileMap : MonoBehaviour
 
         Debug.Log("Done Texture");
 
-        CalclateGridCenterPoints();
+        //CalclateGridCenterPoints();
     }
 
     public void BuildMesh()
@@ -125,7 +118,7 @@ public class TileMap : MonoBehaviour
         mesh.RecalculateNormals();
         Debug.Log("Done Mesh");
 
-        BuildTexture();
+        //BuildTexture();
 
     }
 
@@ -169,6 +162,6 @@ public class TileMap : MonoBehaviour
             biomePrefab.transform.parent = anchor.transform;
             GameManager.MapAnchors.Add(anchor);
         }
-        gameManager.BuildBiomes();
+        //gameManager.BuildBiomes();
     }
 }
