@@ -7,17 +7,26 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField]
     public static List<GameObject> MapAnchors = new List<GameObject>();
+    [SerializeField]
+    public static List<GameObject> SpawnedWisps = new List<GameObject>();
     public TileMap tilemap;
-
     public List<Faction> Factions = new List<Faction>();
+
+    //GameObjects
+    public GameObject WispPrefab;
 
     void Start()
     {
         SetFactions();
+        Debug.Log("Factions Built");
         tilemap.BuildMesh();
+        Debug.Log("Mesh Built");
         tilemap.BuildTexture();
+        Debug.Log("Texture Built");
         tilemap.CalclateGridCenterPoints();
+        Debug.Log("Anchors Spawned");
         BuildBiomes();
+        Debug.Log("Created Biome");
     }
 
     public void SetFactions()
@@ -84,7 +93,7 @@ public class GameManager : MonoBehaviour {
     {
         if (MapAnchors == null)
         {
-            Debug.LogError("MapAnchors is empty");
+            Debug.LogError("MapAnchors List is empty, something be goofed");
             return;
         }
 
@@ -94,17 +103,41 @@ public class GameManager : MonoBehaviour {
             Biome thisBiome = square.AddComponent<Biome>().GetComponent<Biome>();
             //Generate its data
             thisBiome.GenerateBiomeData();
-            
             //Spawn Wisps based on random number
             for (int i = 0; i < thisBiome.numberOfStartingWisps; i++)
             {
                 SpawnWisp(square.transform.position, thisBiome.myFaction);
             }
         }
+        Debug.Log("Created Biomes");
+        Debug.Log("Spawned Wisp");
     }
 
     public void SpawnWisp(Vector3 biomePos, Faction.FactionTypes setFaction)
     {
+        //Spawn in Scene, on the biome pos
+        GameObject wispObj = Instantiate(WispPrefab, biomePos, Quaternion.identity) as GameObject;
 
+        //Instantiate a Wisp Class on the newly created wispObj, 
+        Wisp wispScript = wispObj.AddComponent<Wisp>().GetComponent<Wisp>();
+
+        //Creating this struct so we can pass it in below
+        Wisp.currentState wispsStartingState = new Wisp.currentState();
+        /*
+         * TODO: Setting these values? or maybe random? But they would also have to be the same for
+         * all wisps in that Biome
+         */ 
+        wispsStartingState.myAttitude = Wisp.Attitude.Neutral; 
+        wispsStartingState.myWant = Wisp.Want.Nothing;
+
+        //Set Data to that Instance on that Obj
+        wispScript.BuildWispWithData(
+            UnityEngine.Random.Range(80, 110), //Its health with a bit of Randomness 
+            setFaction,                        //Its Faction (Same as the Biome's)
+            wispsStartingState
+            );
+
+        //Add to our master list 
+        SpawnedWisps.Add(wispObj);
     }
 }

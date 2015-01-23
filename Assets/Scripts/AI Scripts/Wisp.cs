@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,7 +7,6 @@ public class Wisp : MonoBehaviour {
 
     public Faction.FactionTypes faction;
     public int health;
-
     public struct currentState
     {
         public Attitude myAttitude;
@@ -15,6 +15,13 @@ public class Wisp : MonoBehaviour {
 
     public currentState myState;
 
+    public void BuildWispWithData(int health, Faction.FactionTypes faction, currentState setCurrentState)
+    {
+        this.health = health;
+        this.faction = faction;
+        this.gameObject.name = "Wisp_" + this.faction.ToString() + "_" + System.Guid.NewGuid();
+    }
+
     public enum Attitude
     {
         Scared,
@@ -22,8 +29,6 @@ public class Wisp : MonoBehaviour {
         Neutral,
         Hostile,
     };
-
-    public Attitude currentAttitude;
 
     public enum Want
     {

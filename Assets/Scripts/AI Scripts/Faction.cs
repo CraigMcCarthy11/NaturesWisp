@@ -19,10 +19,10 @@ public class Faction {
     
     
     //Constructor
-    public Faction(FactionTypes faction, List<Faction.FactionTypes> setEnemies, List<Faction.FactionTypes> setAllies)
+    public Faction(FactionTypes myFaction, List<Faction.FactionTypes> Enemies, List<Faction.FactionTypes> Allies)
     {
-        Enemies = setEnemies;
-        Allies = setAllies;
-        myFaction = faction;
+        this.Enemies = Enemies;
+        this.Allies = Allies;
+        this.myFaction = myFaction;
     }
 }

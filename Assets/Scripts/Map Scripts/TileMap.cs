@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -42,10 +41,6 @@ public class TileMap : MonoBehaviour
         MeshRenderer mesh_renderer = GetComponent<MeshRenderer>();
         //Sets it to the mesh
         mesh_renderer.sharedMaterials[0].mainTexture = texture;
-
-        Debug.Log("Done Texture");
-
-        //CalclateGridCenterPoints();
     }
 
     public void BuildMesh()
@@ -116,10 +111,6 @@ public class TileMap : MonoBehaviour
 
         //Recalculates normals for lighting purposes... I think
         mesh.RecalculateNormals();
-        Debug.Log("Done Mesh");
-
-        //BuildTexture();
-
     }
 
     public void CalclateGridCenterPoints()
@@ -158,10 +149,13 @@ public class TileMap : MonoBehaviour
             //Set its corrent pos
             anchor.transform.position = pos;
 
+            //Add a box collider and set its size
+            BoxCollider box = anchor.AddComponent<BoxCollider>().GetComponent<BoxCollider>();
+            box.size = new Vector3(1.5f, 1, 1.5f);
+
             GameObject biomePrefab = Instantiate(BasicBiomeTesting, pos, Quaternion.identity) as GameObject;
             biomePrefab.transform.parent = anchor.transform;
             GameManager.MapAnchors.Add(anchor);
         }
-        //gameManager.BuildBiomes();
     }
 }
