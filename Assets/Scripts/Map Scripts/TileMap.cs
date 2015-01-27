@@ -152,9 +152,6 @@ public class TileMap : MonoBehaviour
             //Add a box collider and set its size
             BoxCollider box = anchor.AddComponent<BoxCollider>().GetComponent<BoxCollider>();
             box.size = new Vector3(1.5f, 1, 1.5f);
-
-            GameObject biomePrefab = Instantiate(BasicBiomeTesting, pos, Quaternion.identity) as GameObject;
-            biomePrefab.transform.parent = anchor.transform;
             GameManager.MapAnchors.Add(anchor);
         }
     }

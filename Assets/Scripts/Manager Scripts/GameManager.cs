@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
 
     //GameObjects
     public GameObject WispPrefab;
+    public List<GameObject> BiomePrefabs = new List<GameObject>();
 
     void Start()
     {
@@ -101,8 +102,13 @@ public class GameManager : MonoBehaviour {
         {
             //Add and Access the biome
             Biome thisBiome = square.AddComponent<Biome>().GetComponent<Biome>();
+            //Give it an Instance of GameManager
+            thisBiome.gameManager = this;
             //Generate its data
             thisBiome.GenerateBiomeData();
+            //Spawn it and make a pretty effecr
+            thisBiome.SpawnVisuals(thisBiome.myFaction);
+
             //Spawn Wisps based on random number
             for (int i = 0; i < thisBiome.numberOfStartingWisps; i++)
             {
@@ -110,7 +116,7 @@ public class GameManager : MonoBehaviour {
             }
         }
         Debug.Log("Created Biomes");
-        Debug.Log("Spawned Wisp");
+        Debug.Log("Spawned Wisps");
     }
 
     public void SpawnWisp(Vector3 biomePos, Faction.FactionTypes setFaction)
