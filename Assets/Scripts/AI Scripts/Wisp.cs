@@ -9,7 +9,9 @@ public class Wisp : MonoBehaviour {
     public int health;
     public GameObject Home;
     public GameObject Target;
-    public int MovementSpeed = 20;
+    public int RotationSpeed = 20;
+    public int MovemnetSpeed = 15;
+
     public struct currentState
     {
         public Attitude myAttitude;
@@ -19,6 +21,9 @@ public class Wisp : MonoBehaviour {
 
     public currentState myState;
 
+    /// <summary>
+    /// Sets init Data, This is called right after instatiation 
+    /// </summary>
     public void BuildWispWithData(int health, Faction.FactionTypes faction, currentState setCurrentState, GameObject Home)
     {
         this.health = health;
@@ -26,17 +31,34 @@ public class Wisp : MonoBehaviour {
         this.gameObject.name = "Wisp_" + this.faction.ToString() + "_" + System.Guid.NewGuid();
         this.Home = Home;
 
-        //Set our home to our target(the first object to revole around
+        //Set our home to our target(the first object to revole around)
         Target = Home;
 
         AnimateVisuals();
     }
 
-    void Update()
+    void Start()
     {
-        this.transform.RotateAround(Target.transform.position, Vector3.up, MovementSpeed * Time.deltaTime);
+        StartCoroutine(MoveToTarget(Target, 30));
     }
 
+    void Update()
+    {
+        
+        //If we are Idling, rotate around out home or target
+        if(myState.myAction == Action.Idling) 
+            this.transform.RotateAround(Target.transform.position, Vector3.up, RotationSpeed * Time.deltaTime);
+
+        if (myState.myAction == Action.Moving)
+        {
+
+        }
+
+    }
+
+    /// <summary>
+    /// The Actions of the Wisp
+    /// </summary>
     public enum Action
     {
         Moving, 
@@ -46,6 +68,9 @@ public class Wisp : MonoBehaviour {
         Dieing
     }
 
+    /// <summary>
+    /// Its Attitude of and how it reacts to other Factions
+    /// </summary>
     public enum Attitude
     {
         Scared,
@@ -54,6 +79,9 @@ public class Wisp : MonoBehaviour {
         Hostile,
     };
 
+    /// <summary>
+    /// How it Interacts with Other Factions
+    /// </summary>
     public enum Want
     {
         Nothing,
@@ -63,18 +91,6 @@ public class Wisp : MonoBehaviour {
         Arctic,
         Everything
     };
-
-    private Attitude HandleAttitude()
-    {
-        Attitude newAttitude = Attitude.Neutral; 
-        return newAttitude;
-    }
-
-    private Want HandleWant()
-    {
-        Want newWant = Want.Nothing;
-        return newWant;
-    }
 
     /// <summary>
     /// Loopes throught the ParticleAnimator setting its colors based on a hex code 
@@ -128,5 +144,17 @@ public class Wisp : MonoBehaviour {
             colorArray[i] = new Color32(r, g, b, 255);
         }
         return colorArray;
+    }
+
+    public IEnumerator MoveToTarget(GameObject Target, int overTime)
+    {
+        float startTime = Time.time;
+        while (Time.time < startTime + overTime)
+        {
+            float step = MovemnetSpeed * Time.deltaTime;
+            this.transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, step);
+            //this.transform.position = Target.transform.position;
+            yield return null;
+        }
     }
 }

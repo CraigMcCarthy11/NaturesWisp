@@ -78,7 +78,7 @@ public class Biome : MonoBehaviour
  
         //Animate it through code and wait to finish
         posToSpawnBelow.y += 10;
-        StartCoroutine(PlayStartUpEffect(biomeObject,posToSpawnBelow, 100f));
+        StartCoroutine(PlayStartUpEffect(biomeObject,posToSpawnBelow, 50f));
     }
 
     /// <summary>
@@ -108,8 +108,9 @@ public class Biome : MonoBehaviour
         while(Time.time < startTime + overTime)
         {
             objToMove.transform.position = Vector3.Lerp(objToMove.transform.position, target, (Time.time - startTime) / overTime);
+            transform.position = target;
             yield return null;
         }
-        transform.position = target;
+        
     }
 }

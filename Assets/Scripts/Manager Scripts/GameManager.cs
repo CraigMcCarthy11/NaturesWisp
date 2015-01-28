@@ -113,21 +113,25 @@ public class GameManager : MonoBehaviour {
             //Spawn Wisps based on random number
             for (int i = 0; i < thisBiome.numberOfStartingWisps; i++)
             {
-                SpawnWisp(square.transform.position, thisBiome.myFaction, square);
+                SpawnWisp(thisBiome.myFaction, square);
             }
         }
         Debug.Log("Created Biomes");
         Debug.Log("Spawned Wisps");
     }
 
-    public void SpawnWisp(Vector3 biomePos, Faction.FactionTypes setFaction, GameObject Home)
+    public void SpawnWisp(Faction.FactionTypes setFaction, GameObject Home)
     {
-        //Spawn in Scene, on the biome pos
-        GameObject wispObj = Instantiate(WispPrefab, biomePos, Quaternion.identity) as GameObject;
+        //Spawn in Scene, on the at a random point in the sky
+        float z = UnityEngine.Random.Range(0f,250f);
+        float y = Camera.mainCamera.transform.position.y - 20; //Spawn a little below the player
+        float x = UnityEngine.Random.Range(22f,250f);
+        Vector3 RandomSpawnPos = new Vector3(x, y, z);
+
+        GameObject wispObj = Instantiate(WispPrefab, RandomSpawnPos, Quaternion.identity) as GameObject;
 
         //Instantiate a Wisp Class on the newly created wispObj, 
         Wisp wispScript = wispObj.AddComponent<Wisp>().GetComponent<Wisp>();
-
         //Creating this struct so we can pass it in below
         Wisp.currentState wispsStartingState = new Wisp.currentState();
         /*
