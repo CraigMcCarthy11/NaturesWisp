@@ -13,6 +13,10 @@ public class Biome : MonoBehaviour
         Arctic
     };
 
+    //Static
+    private static float timeToSpawnMod = 0;
+    private static int initDepth = 18;
+
     //Public
     public BiomeTypes myBiome;
     public Faction.FactionTypes myFaction;
@@ -21,7 +25,6 @@ public class Biome : MonoBehaviour
 
     //Private
     public int numberOfStartingWisps;
-    private System.Random rand = new System.Random();
     private int MAX_STARTING_WISPS = 8;
     private int MIN_STARTING_WISPS = 4;
     private int MAX_STARTING_HEALTH = 110;
@@ -43,8 +46,10 @@ public class Biome : MonoBehaviour
     /// It only gets called in the constructor after we have generated all the data to build
     /// the biome
     /// </summary>
-    public void SpawnVisuals(Faction.FactionTypes factionToSpawn)
+    public IEnumerator SpawnVisuals(Faction.FactionTypes factionToSpawn)
     {
+        timeToSpawnMod += 0.5f;
+        yield return new WaitForSeconds(timeToSpawnMod);
         GameObject BiomePrefab =  null;
         try
         {
@@ -58,14 +63,22 @@ public class Biome : MonoBehaviour
         }
         catch (System.Exception ex)
         {
-            Debug.LogError("Couldn't find prefab to spawn because: " + ex);
-            return;
+            Debug.LogError("Couldn't find prefab in List, probably doesn't exsist: " + ex);
         }
 
-        Vector3 posToSpawnBelow = new Vector3(this.transform.position.x,this.transform.position.y, this.transform.position.z);
+        //Create the Dust effect
+        //NOTE: DustDestoryScript, handles destorying
+        GameObject dust = Instantiate(gameManager.DustPrefab, this.transform.position, Quaternion.identity) as GameObject;
+
+        Vector3 posToSpawnBelow = new Vector3(this.transform.position.x,this.transform.position.y - initDepth, this.transform.position.z);
         GameObject biomeObject = Instantiate(BiomePrefab, posToSpawnBelow, Quaternion.identity) as GameObject;
+
         //Set it as the child to this obj
-        biomeObject.transform.parent = this.transform; 
+        biomeObject.transform.parent = this.transform;
+ 
+        //Animate it through code and wait to finish
+        posToSpawnBelow.y += 10;
+        StartCoroutine(PlayStartUpEffect(biomeObject,posToSpawnBelow, 100f));
     }
 
     /// <summary>
@@ -80,5 +93,23 @@ public class Biome : MonoBehaviour
         System.Array enumArray = System.Enum.GetValues(typeof(T));
         T theEnum = (T)enumArray.GetValue(UnityEngine.Random.Range(0, enumArray.Length));
         return theEnum;
+    }
+
+    /// <summary>
+    /// This has a basic timer that Lerps a gameObject to a target over a certian amount of time
+    /// </summary>
+    /// <param name="objToMove">The GameObject to move</param>
+    /// <param name="target">Its desiered pos</param>
+    /// <param name="overTime">the Time it takes to do that</param>
+    /// <returns></returns>
+    private IEnumerator PlayStartUpEffect(GameObject objToMove, Vector3 target, float overTime)
+    {
+        float startTime = Time.time;
+        while(Time.time < startTime + overTime)
+        {
+            objToMove.transform.position = Vector3.Lerp(objToMove.transform.position, target, (Time.time - startTime) / overTime);
+            yield return null;
+        }
+        transform.position = target;
     }
 }

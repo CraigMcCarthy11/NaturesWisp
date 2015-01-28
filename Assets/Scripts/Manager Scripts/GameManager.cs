@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
     //GameObjects
     public GameObject WispPrefab;
     public List<GameObject> BiomePrefabs = new List<GameObject>();
+    public GameObject DustPrefab;
 
     void Start()
     {
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Factions Built");
         tilemap.BuildMesh();
         Debug.Log("Mesh Built");
-        tilemap.BuildTexture();
+        //tilemap.BuildTexture();
         Debug.Log("Texture Built");
         tilemap.CalclateGridCenterPoints();
         Debug.Log("Anchors Spawned");
@@ -106,20 +107,20 @@ public class GameManager : MonoBehaviour {
             thisBiome.gameManager = this;
             //Generate its data
             thisBiome.GenerateBiomeData();
-            //Spawn it and make a pretty effecr
-            thisBiome.SpawnVisuals(thisBiome.myFaction);
+            //Spawn it and make a pretty effect
+            StartCoroutine(thisBiome.SpawnVisuals(thisBiome.myFaction));
 
             //Spawn Wisps based on random number
             for (int i = 0; i < thisBiome.numberOfStartingWisps; i++)
             {
-                SpawnWisp(square.transform.position, thisBiome.myFaction);
+                SpawnWisp(square.transform.position, thisBiome.myFaction, square);
             }
         }
         Debug.Log("Created Biomes");
         Debug.Log("Spawned Wisps");
     }
 
-    public void SpawnWisp(Vector3 biomePos, Faction.FactionTypes setFaction)
+    public void SpawnWisp(Vector3 biomePos, Faction.FactionTypes setFaction, GameObject Home)
     {
         //Spawn in Scene, on the biome pos
         GameObject wispObj = Instantiate(WispPrefab, biomePos, Quaternion.identity) as GameObject;
@@ -135,12 +136,14 @@ public class GameManager : MonoBehaviour {
          */ 
         wispsStartingState.myAttitude = Wisp.Attitude.Neutral; 
         wispsStartingState.myWant = Wisp.Want.Nothing;
+        wispsStartingState.myAction = Wisp.Action.Idling;
 
         //Set Data to that Instance on that Obj
         wispScript.BuildWispWithData(
             UnityEngine.Random.Range(80, 110), //Its health with a bit of Randomness 
             setFaction,                        //Its Faction (Same as the Biome's)
-            wispsStartingState
+            wispsStartingState,                 //Its starting attitude and want
+            Home                               //Its Home GameObject (a MapAnchor) 
             );
 
         //Add to our master list 

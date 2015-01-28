@@ -1,7 +1,9 @@
 # NaturesWisp
+# Level Design Project
+
 Craig McCarthy - Programmer
 Sam Narkawicz - Programmer
 Ian Disbrow - Designer / Artist
 
-MAde in Unity3D
+Made in Unity3D 4.6
 
