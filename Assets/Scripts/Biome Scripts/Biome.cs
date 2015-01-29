@@ -15,7 +15,7 @@ public class Biome : MonoBehaviour
 
     //Static
     private static float timeToSpawnMod = 0;
-    private static int initDepth = 18;
+    private static int initDepth = 10;
 
     //Public
     public BiomeTypes myBiome;
