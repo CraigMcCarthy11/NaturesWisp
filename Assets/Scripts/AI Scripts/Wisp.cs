@@ -11,21 +11,19 @@ public class Wisp : MonoBehaviour {
     public GameObject Target;
     public int RotationSpeed = 20;
     public int MovemnetSpeed = 15;
-
-    public struct currentState
-    {
-        public Attitude myAttitude;
-        public Want myWant;
-        public Action myAction;
-    }
-
-    public currentState myState;
+    public bool isMoving;
+    public Attitude myAttitude;
+    public Want myWant;
+    public Action myAction;
 
     /// <summary>
     /// Sets init Data, This is called right after instatiation 
     /// </summary>
-    public void BuildWispWithData(int health, Faction.FactionTypes faction, currentState setCurrentState, GameObject Home)
+    public void BuildWispWithData(int health, Faction.FactionTypes faction, Action myAction, Attitude myAttitude, Want myWant, GameObject Home)
     {
+        this.myAction = myAction;
+        this.myAttitude = myAttitude;
+        this.myWant = myWant;
         this.health = health;
         this.faction = faction;
         this.gameObject.name = "Wisp_" + this.faction.ToString() + "_" + System.Guid.NewGuid();
@@ -39,19 +37,26 @@ public class Wisp : MonoBehaviour {
 
     void Start()
     {
-        StartCoroutine(MoveToTarget(Target, 30));
     }
 
     void Update()
     {
-        
+        //Check if we are moving
+        if (this.transform.position == Target.transform.position)
+        {
+            //If not switch to a defualt state
+            //TODO: this may not be modular, becasue what happens after start up
+            myAction = Action.Idling;
+            isMoving = false;
+        }
+
         //If we are Idling, rotate around out home or target
-        if(myState.myAction == Action.Idling) 
+        if(myAction == Action.Idling) 
             this.transform.RotateAround(Target.transform.position, Vector3.up, RotationSpeed * Time.deltaTime);
 
-        if (myState.myAction == Action.Moving)
+        if (myAction == Action.Moving && isMoving == false)
         {
-
+            StartCoroutine(MoveToTarget(new Vector3(Target.transform.position.x + 3, Target.transform.position.y, Target.transform.position.z), 20)); //Offeting so we can call RotateAround()
         }
 
     }
@@ -65,7 +70,8 @@ public class Wisp : MonoBehaviour {
         Idling,
         Fighting,
         Spawning,
-        Dieing
+        Dieing,
+        Nothing
     }
 
     /// <summary>
@@ -146,14 +152,14 @@ public class Wisp : MonoBehaviour {
         return colorArray;
     }
 
-    public IEnumerator MoveToTarget(GameObject Target, int overTime)
+    public IEnumerator MoveToTarget(Vector3 Target, int overTime)
     {
+        isMoving = true;
         float startTime = Time.time;
         while (Time.time < startTime + overTime)
         {
             float step = MovemnetSpeed * Time.deltaTime;
-            this.transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, step);
-            //this.transform.position = Target.transform.position;
+            this.transform.position = Vector3.MoveTowards(transform.position, Target, step);
             yield return null;
         }
     }

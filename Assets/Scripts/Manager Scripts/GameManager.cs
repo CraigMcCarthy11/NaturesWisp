@@ -133,20 +133,22 @@ public class GameManager : MonoBehaviour {
         //Instantiate a Wisp Class on the newly created wispObj, 
         Wisp wispScript = wispObj.AddComponent<Wisp>().GetComponent<Wisp>();
         //Creating this struct so we can pass it in below
-        Wisp.currentState wispsStartingState = new Wisp.currentState();
+        
         /*
          * TODO: Setting these values? or maybe random? But they would also have to be the same for
          * all wisps in that Biome
-         */ 
-        wispsStartingState.myAttitude = Wisp.Attitude.Neutral; 
-        wispsStartingState.myWant = Wisp.Want.Nothing;
-        wispsStartingState.myAction = Wisp.Action.Idling;
+         */
+        Wisp.Attitude myAttitude = Wisp.Attitude.Neutral;
+        Wisp.Want myWant = Wisp.Want.Nothing;
+        Wisp.Action myAction = Wisp.Action.Moving;
 
         //Set Data to that Instance on that Obj
         wispScript.BuildWispWithData(
             UnityEngine.Random.Range(80, 110), //Its health with a bit of Randomness 
             setFaction,                        //Its Faction (Same as the Biome's)
-            wispsStartingState,                 //Its starting attitude and want
+            myAction,
+            myAttitude,
+            myWant,
             Home                               //Its Home GameObject (a MapAnchor) 
             );
 
