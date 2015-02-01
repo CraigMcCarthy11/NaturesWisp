@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Texture Built");
         tilemap.CalclateGridCenterPoints();
         Debug.Log("Anchors Spawned");
-        BuildBiomes();
+        StartCoroutine(BuildBiomes());
         Debug.Log("Created Biome");
     }
 
@@ -91,14 +91,8 @@ public class GameManager : MonoBehaviour {
         Factions.Add(Tropical);
     }
 
-    public void BuildBiomes()
+    IEnumerator BuildBiomes()
     {
-        if (MapAnchors == null)
-        {
-            Debug.LogError("MapAnchors List is empty, something be goofed");
-            return;
-        }
-
         foreach (GameObject square in MapAnchors)
         {
             //Add and Access the biome
@@ -113,6 +107,7 @@ public class GameManager : MonoBehaviour {
             //Spawn Wisps based on random number
             for (int i = 0; i < thisBiome.numberOfStartingWisps; i++)
             {
+                yield return new WaitForSeconds(0.5f);
                 SpawnWisp(thisBiome.myFaction, square);
             }
         }

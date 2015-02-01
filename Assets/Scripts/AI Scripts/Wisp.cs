@@ -26,7 +26,7 @@ public class Wisp : MonoBehaviour {
         this.myWant = myWant;
         this.health = health;
         this.faction = faction;
-        this.gameObject.name = "Wisp_" + this.faction.ToString() + "_" + System.Guid.NewGuid();
+        this.gameObject.name = "Wisp_" + this.faction.ToString() + "_" + Home.name;
         this.Home = Home;
 
         //Set our home to our target(the first object to revole around)
@@ -48,6 +48,8 @@ public class Wisp : MonoBehaviour {
             //TODO: this may not be modular, becasue what happens after start up
             myAction = Action.Idling;
             isMoving = false;
+            //offset so we can rotate around it
+            transform.position = new Vector3(transform.position.x + 11, transform.position.y + 5, transform.position.z);
         }
 
         //If we are Idling, rotate around out home or target
@@ -56,7 +58,7 @@ public class Wisp : MonoBehaviour {
 
         if (myAction == Action.Moving && isMoving == false)
         {
-            StartCoroutine(MoveToTarget(new Vector3(Target.transform.position.x + 3, Target.transform.position.y, Target.transform.position.z), 20)); //Offeting so we can call RotateAround()
+            StartCoroutine(MoveToTarget(new Vector3(Target.transform.position.x, Target.transform.position.y, Target.transform.position.z), 20)); //Offeting so we can call RotateAround()
         }
 
     }
