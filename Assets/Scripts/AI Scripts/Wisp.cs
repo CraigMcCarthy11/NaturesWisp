@@ -16,62 +16,16 @@ public class Wisp : MonoBehaviour {
     public Want myWant;
     public Action myAction;
 
-    /// <summary>
-    /// Sets init Data, This is called right after instatiation 
-    /// </summary>
-    public void BuildWispWithData(int health, Faction.FactionTypes faction, Action myAction, Attitude myAttitude, Want myWant, GameObject Home)
-    {
-        this.myAction = myAction;
-        this.myAttitude = myAttitude;
-        this.myWant = myWant;
-        this.health = health;
-        this.faction = faction;
-        this.gameObject.name = "Wisp_" + this.faction.ToString() + "_" + Home.name;
-        this.Home = Home;
-
-        //Set our home to our target(the first object to revole around)
-        Target = Home;
-
-        AnimateVisuals();
-    }
-
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-        //Check if we are moving
-        if (this.transform.position == Target.transform.position)
-        {
-            //If not switch to a defualt state
-            //TODO: this may not be modular, becasue what happens after start up
-            myAction = Action.Idling;
-            isMoving = false;
-            //offset so we can rotate around it
-            transform.position = new Vector3(transform.position.x + 11, transform.position.y + 5, transform.position.z);
-        }
-
-        //If we are Idling, rotate around out home or target
-        if(myAction == Action.Idling) 
-            this.transform.RotateAround(Target.transform.position, Vector3.up, RotationSpeed * Time.deltaTime);
-
-        if (myAction == Action.Moving && isMoving == false)
-        {
-            StartCoroutine(MoveToTarget(new Vector3(Target.transform.position.x, Target.transform.position.y, Target.transform.position.z), 20)); //Offeting so we can call RotateAround()
-        }
-
-    }
 
     /// <summary>
     /// The Actions of the Wisp
     /// </summary>
     public enum Action
     {
-        Moving, 
+        Initialization,
+        Moving,
         Idling,
         Fighting,
-        Spawning,
         Dieing,
         Nothing
     }
@@ -99,6 +53,123 @@ public class Wisp : MonoBehaviour {
         Arctic,
         Everything
     };
+
+    /// <summary>
+    /// Sets init Data, This is called right after instatiation 
+    /// </summary>
+    public void BuildWispWithData(int health, Faction.FactionTypes faction, Action myAction, Attitude myAttitude, Want myWant, GameObject Home)
+    {
+        this.myAction = myAction;
+        this.myAttitude = myAttitude;
+        this.myWant = myWant;
+        this.health = health;
+        this.faction = faction;
+        this.gameObject.name = "Wisp_" + this.faction.ToString() + "_" + Home.name;
+        this.Home = Home;
+
+        //Set our home to our target(the first object to revole around)
+        Target = Home;
+
+        AnimateVisuals();
+    }
+
+    void Update()
+    {
+        HandleAction(myAction);
+        /*
+        //Check if we are moving
+        if (this.transform.position == Target.transform.position)
+        {
+            //If not switch to a defualt state
+            //TODO: this may not be modular, becasue what happens after start up
+            myAction = Action.Idling;
+            isMoving = false;
+            //offset so we can rotate around it
+            transform.position = new Vector3(transform.position.x + 11, transform.position.y + 5, transform.position.z);
+        }
+
+        //If we are Idling, rotate around out home or target
+        if(myAction == Action.Idling) 
+            this.transform.RotateAround(Target.transform.position, Vector3.up, RotationSpeed * Time.deltaTime);
+
+        if (myAction == Action.Moving && isMoving == false)
+        {
+            StartCoroutine(MoveToTarget(new Vector3(Target.transform.position.x, Target.transform.position.y, Target.transform.position.z), 20)); //Offeting so we can call RotateAround()
+        }
+         */ 
+
+    }
+
+    private void HandleAction(Action action)
+    {
+        switch(action)
+        {
+            case Action.Dieing:
+                Dieing();
+                break;
+            case Action.Fighting:
+                Fighting();
+                break;
+            case Action.Idling:
+                Idling();
+                break;
+            case Action.Initialization:
+                Initialization();
+                break;
+            case Action.Moving:
+                Moving();
+                break;
+            case Action.Nothing:
+                Debug.Log("Current Action: " + action.ToString());
+                break;
+        }
+    }
+
+    #region Actions Functions
+
+    private void Initialization()
+    {
+        StartCoroutine(MoveToTarget(new Vector3(Home.transform.position.x + 3, Home.transform.position.y, Home.transform.position.z), 20)); //Offeting so we can call RotateAround()
+    }
+
+    private void Moving()
+    {
+        try
+        {
+            if (myAction == Action.Moving && isMoving == false)
+            {
+                StartCoroutine(MoveToTarget(new Vector3(Target.transform.position.x + 3, Target.transform.position.y, Target.transform.position.z), 20)); //Offeting so we can call RotateAround()
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("[SELF] Error moving to target. Target null? : " + ex);
+        }
+    }
+
+    private void Idling()
+    {
+        try
+        {
+            this.transform.RotateAround(Target.transform.position, Vector3.up, RotationSpeed * Time.deltaTime);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("[SELF] Error rotating around object. Target null? : " + ex);
+        }
+    }
+
+    private void Fighting()
+    {
+
+    }
+
+    private void Dieing()
+    {
+
+    }
+
+    #endregion
 
     /// <summary>
     /// Loopes throught the ParticleAnimator setting its colors based on a hex code 
