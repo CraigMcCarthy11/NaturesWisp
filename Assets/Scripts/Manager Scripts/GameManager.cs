@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour {
             for (int i = 0; i < thisBiome.numberOfStartingWisps; i++)
             {
                 yield return new WaitForSeconds(0.5f);
-                SpawnWisp(thisBiome.myFaction, square);
+                //SpawnWisp(thisBiome.myFaction, square);
             }
             
         }
