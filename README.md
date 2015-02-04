@@ -1,7 +1,7 @@
 # NaturesWisp
 # Level Design Project
 
-Craig McCarthy - Programmer
+Craig McCarthy - Programmer (Also known for sucking dicks for free)
 Sam Narkawicz - Programmer
 Ian Disbrow - Designer / Artist
 
