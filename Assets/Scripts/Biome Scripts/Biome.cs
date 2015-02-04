@@ -22,9 +22,11 @@ public class Biome : MonoBehaviour
     public Faction.FactionTypes myFaction;
     public int health;
     public GameManager gameManager;
+    public List<GameObject> Neighbors = new List<GameObject>();
+    public int numberOfStartingWisps;
 
     //Private
-    public int numberOfStartingWisps;
+    private int numberOfNeighborsToHave = 8;
     private int MAX_STARTING_WISPS = 8;
     private int MIN_STARTING_WISPS = 4;
     private int MAX_STARTING_HEALTH = 110;
@@ -111,6 +113,32 @@ public class Biome : MonoBehaviour
             transform.position = target;
             yield return null;
         }
-        
     }
+
+    public void FindAndSetNeighbors()
+    {
+        //Find neighbors based on my distance
+        try
+        {
+            List<GameObject> TempNeighbors = new List<GameObject>(GameManager.MapAnchors);
+            TempNeighbors.Sort(SortByDistance);
+            //Sort the top 5 (closest) in the list as Neighbors NOTE: Skipping the first one in the list because it myself
+            for (int i = 0; i < numberOfNeighborsToHave; i++)
+            {
+                Neighbors.Add(TempNeighbors[i + 1]);
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("[SELF] Error finding and/or setting Neighbors becasue: " + ex);
+        }
+    }
+
+    public int SortByDistance(GameObject a, GameObject b)
+    {
+        var dstToA = Vector3.Distance(transform.position, a.transform.position);
+        var dstToB = Vector3.Distance(transform.position, b.transform.position);
+        return dstToA.CompareTo(dstToB);
+    }
+
 }

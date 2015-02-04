@@ -148,6 +148,8 @@ public class TileMap : MonoBehaviour
             anchor.transform.parent = MapAnchor.transform;
             //Set its corrent pos
             anchor.transform.position = pos;
+            //Give it the biome script
+            anchor.AddComponent<Biome>();
 
             //Add a box collider and set its size
             BoxCollider box = anchor.AddComponent<BoxCollider>().GetComponent<BoxCollider>();

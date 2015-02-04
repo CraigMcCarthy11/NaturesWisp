@@ -93,10 +93,16 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator BuildBiomes()
     {
+        for (int i = 0; i < MapAnchors.Count; i++)
+        {
+            MapAnchors[i].GetComponent<Biome>().FindAndSetNeighbors();
+        }
+
+        //Setting init data and spawning wisps with it
         foreach (GameObject square in MapAnchors)
         {
             //Add and Access the biome
-            Biome thisBiome = square.AddComponent<Biome>().GetComponent<Biome>();
+            Biome thisBiome = square.GetComponent<Biome>();
             //Give it an Instance of GameManager
             thisBiome.gameManager = this;
             //Generate its data
@@ -110,6 +116,7 @@ public class GameManager : MonoBehaviour {
                 yield return new WaitForSeconds(0.5f);
                 SpawnWisp(thisBiome.myFaction, square);
             }
+            
         }
         Debug.Log("Created Biomes");
         Debug.Log("Spawned Wisps");

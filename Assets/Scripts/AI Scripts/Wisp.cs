@@ -17,6 +17,8 @@ public class Wisp : MonoBehaviour {
     public Action myAction;
     public float idleRotX,idleRotY,idleRotZ;
 
+    //All the Enum's used in this class
+    #region Wisp Enumorations
 
     /// <summary>
     /// The Actions of the Wisp
@@ -54,6 +56,8 @@ public class Wisp : MonoBehaviour {
         Arctic,
         Everything
     };
+
+    #endregion
 
     /// <summary>
     /// Sets init Data, This is called right after instatiation 
@@ -138,7 +142,6 @@ public class Wisp : MonoBehaviour {
         {
             //Offeting so we can call RotateAround()
             this.transform.position = new Vector3(transform.position.x + 12, transform.position.y, transform.position.z);
-            Debug.Log(this.gameObject.name + " is home, offset and switch states");
             myAction = Action.Idling;
             StopCoroutine("MoveToHome");
         }
