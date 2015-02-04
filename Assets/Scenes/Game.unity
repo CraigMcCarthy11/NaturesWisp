@@ -172,7 +172,7 @@ MonoBehaviour:
   touchScrollOffset: .100000001
   touchRotateOffset: 2
   keyBoardControl: 1
-  mouseControl: 1
+  mouseControl: 0
   touchControl: 1
   allowFollow: 1
 --- !u!81 &46098547
@@ -1582,6 +1582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b15cecdc1849654097d2f14ca98ed25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnedWisps: []
   tilemap: {fileID: 153342917}
   WispPrefab: {fileID: 100000, guid: 7f58718d52e71bc4cba2308387712569, type: 2}
   BiomePrefabs:
@@ -1989,7 +1990,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 28e29192f45cb3542a29f78368635e90, type: 2}
       propertyPath: mouseControl
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 28e29192f45cb3542a29f78368635e90, type: 2}
       propertyPath: touchRotateOffset

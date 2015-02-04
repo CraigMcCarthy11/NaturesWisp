@@ -9,12 +9,13 @@ public class Wisp : MonoBehaviour {
     public int health;
     public GameObject Home;
     public GameObject Target;
-    public int RotationSpeed = 20;
+    public int RotationSpeed = 90;
     public int MovemnetSpeed = 15;
     public bool isMoving;
     public Attitude myAttitude;
     public Want myWant;
     public Action myAction;
+    public float idleRotX,idleRotY,idleRotZ;
 
 
     /// <summary>
@@ -66,6 +67,9 @@ public class Wisp : MonoBehaviour {
         this.faction = faction;
         this.gameObject.name = "Wisp_" + this.faction.ToString() + "_" + Home.name;
         this.Home = Home;
+        this.idleRotX = UnityEngine.Random.Range(0, 20000);
+        this.idleRotY = UnityEngine.Random.Range(0, 20000);
+        this.idleRotZ = UnityEngine.Random.Range(0, 20000);
 
         //Set our home to our target(the first object to revole around)
         Target = Home;
@@ -129,11 +133,20 @@ public class Wisp : MonoBehaviour {
 
     private void Initialization()
     {
-        StartCoroutine(MoveToTarget(new Vector3(Home.transform.position.x + 3, Home.transform.position.y, Home.transform.position.z), 20)); //Offeting so we can call RotateAround()
+        StartCoroutine("MoveToHome",new Vector3(Home.transform.position.x, Home.transform.position.y, Home.transform.position.z)); 
+        if (this.transform.position == Home.transform.position)
+        {
+            //Offeting so we can call RotateAround()
+            this.transform.position = new Vector3(transform.position.x + 12, transform.position.y, transform.position.z);
+            Debug.Log(this.gameObject.name + " is home, offset and switch states");
+            myAction = Action.Idling;
+            StopCoroutine("MoveToHome");
+        }
     }
 
     private void Moving()
     {
+        
         try
         {
             if (myAction == Action.Moving && isMoving == false)
@@ -151,7 +164,7 @@ public class Wisp : MonoBehaviour {
     {
         try
         {
-            this.transform.RotateAround(Target.transform.position, Vector3.up, RotationSpeed * Time.deltaTime);
+            this.transform.RotateAround(Target.transform.position, new Vector3(idleRotX,idleRotY,idleRotZ), RotationSpeed * Time.deltaTime);
         }
         catch (System.Exception ex)
         {
@@ -161,7 +174,6 @@ public class Wisp : MonoBehaviour {
 
     private void Fighting()
     {
-
     }
 
     private void Dieing()
@@ -233,6 +245,19 @@ public class Wisp : MonoBehaviour {
         {
             float step = MovemnetSpeed * Time.deltaTime;
             this.transform.position = Vector3.MoveTowards(transform.position, Target, step);
+            yield return null;
+        }
+    }
+
+    public IEnumerator MoveToHome(Vector3 myHome)
+    {
+        isMoving = true;
+        int overTime = 20;
+        float startTime = Time.time;
+        while (Time.time < startTime + overTime)
+        {
+            float step = MovemnetSpeed * Time.deltaTime;
+            this.transform.position = Vector3.MoveTowards(transform.position, myHome, step);
             yield return null;
         }
     }

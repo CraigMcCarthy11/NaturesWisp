@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     public static List<GameObject> MapAnchors = new List<GameObject>();
     [SerializeField]
-    public static List<GameObject> SpawnedWisps = new List<GameObject>();
+    public List<GameObject> SpawnedWisps = new List<GameObject>();
     public TileMap tilemap;
     public List<Faction> Factions = new List<Faction>();
 
@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour {
          */
         Wisp.Attitude myAttitude = Wisp.Attitude.Neutral;
         Wisp.Want myWant = Wisp.Want.Nothing;
-        Wisp.Action myAction = Wisp.Action.Moving;
+        Wisp.Action myAction = Wisp.Action.Initialization;
 
         //Set Data to that Instance on that Obj
         wispScript.BuildWispWithData(
