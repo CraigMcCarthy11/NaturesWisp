@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     public List<GameObject> SpawnedWisps = new List<GameObject>();
     public TileMap tilemap;
-    public List<Faction> Factions = new List<Faction>();
+    public Dictionary<Faction.FactionTypes, Faction> FactionsMasterDic = new Dictionary<Faction.FactionTypes, Faction>();
 
     //GameObjects
     public GameObject WispPrefab;
@@ -44,8 +44,9 @@ public class GameManager : MonoBehaviour {
         ArcticEnemies.Add(Faction.FactionTypes.Tropical);
 
         //Create and add to master list
-        Faction Arctic = new Faction(Faction.FactionTypes.Arctic, ArcticEnemies, ArcticsAllies);
-        Factions.Add(Arctic);
+        Faction Arctic = new Faction();
+        Arctic.InitFaction(Faction.FactionTypes.Arctic, ArcticEnemies, ArcticsAllies);
+        FactionsMasterDic.Add(Faction.FactionTypes.Arctic, Arctic);
 
         //============= Desert ===============
         //Allies
@@ -58,8 +59,9 @@ public class GameManager : MonoBehaviour {
         DesertEnemies.Add(Faction.FactionTypes.Arctic);
 
         //Create and add to master list
-        Faction Desert = new Faction(Faction.FactionTypes.Desert, ArcticEnemies, ArcticsAllies);
-        Factions.Add(Desert);
+        Faction Desert = new Faction();
+        Desert.InitFaction(Faction.FactionTypes.Desert, ArcticEnemies, ArcticsAllies);
+        FactionsMasterDic.Add(Faction.FactionTypes.Desert, Desert);
 
 
         //============= Woodland ===============
@@ -73,8 +75,9 @@ public class GameManager : MonoBehaviour {
         WoodlandEnemies.Add(Faction.FactionTypes.Tropical);
 
         //Create and add to master list
-        Faction Woodland = new Faction(Faction.FactionTypes.Woodland, ArcticEnemies, ArcticsAllies);
-        Factions.Add(Woodland);
+        Faction Woodland = new Faction();
+        Woodland.InitFaction(Faction.FactionTypes.Woodland, ArcticEnemies, ArcticsAllies);
+        FactionsMasterDic.Add(Faction.FactionTypes.Woodland, Woodland);
 
         //============= Tropical ===============
         //Allies
@@ -87,8 +90,9 @@ public class GameManager : MonoBehaviour {
         TropicalEnemies.Add(Faction.FactionTypes.Woodland);
 
         //Create and add to master list
-        Faction Tropical = new Faction(Faction.FactionTypes.Woodland, ArcticEnemies, ArcticsAllies);
-        Factions.Add(Tropical);
+        Faction Tropical = new Faction();
+        Tropical.InitFaction(Faction.FactionTypes.Tropical, TropicalEnemies, TropicalAllies);
+        FactionsMasterDic.Add(Faction.FactionTypes.Tropical, Tropical);
     }
 
     IEnumerator BuildBiomes()
@@ -107,6 +111,24 @@ public class GameManager : MonoBehaviour {
             thisBiome.gameManager = this;
             //Generate its data
             thisBiome.GenerateBiomeData();
+
+            //Add the faction class based on what biome they are
+            switch (thisBiome.myFaction)
+            {
+                case Faction.FactionTypes.Arctic:
+                    square.AddComponent<Faction>().InitFaction(Faction.FactionTypes.Arctic, FactionsMasterDic[Faction.FactionTypes.Arctic].Enemies,FactionsMasterDic[Faction.FactionTypes.Arctic].Allies);
+                    break;
+                case Faction.FactionTypes.Desert:
+                    square.AddComponent<Faction>().InitFaction(Faction.FactionTypes.Desert, FactionsMasterDic[Faction.FactionTypes.Desert].Enemies, FactionsMasterDic[Faction.FactionTypes.Desert].Allies);
+                    break;
+                case Faction.FactionTypes.Tropical:
+                    square.AddComponent<Faction>().InitFaction(Faction.FactionTypes.Tropical, FactionsMasterDic[Faction.FactionTypes.Tropical].Enemies, FactionsMasterDic[Faction.FactionTypes.Tropical].Allies);
+                    break;
+                case Faction.FactionTypes.Woodland:
+                    square.AddComponent<Faction>().InitFaction(Faction.FactionTypes.Woodland, FactionsMasterDic[Faction.FactionTypes.Woodland].Enemies, FactionsMasterDic[Faction.FactionTypes.Woodland].Allies);
+                    break;
+            }
+
             //Spawn it and make a pretty effect
             StartCoroutine(thisBiome.SpawnVisuals(thisBiome.myFaction));
 
@@ -114,7 +136,7 @@ public class GameManager : MonoBehaviour {
             for (int i = 0; i < thisBiome.numberOfStartingWisps; i++)
             {
                 yield return new WaitForSeconds(0.5f);
-                //SpawnWisp(thisBiome.myFaction, square);
+                SpawnWisp(thisBiome.myFaction, square);
             }
             
         }
@@ -156,5 +178,23 @@ public class GameManager : MonoBehaviour {
 
         //Add to our master list 
         SpawnedWisps.Add(wispObj);
+    }
+
+    public void UpdateFaction(Faction.FactionTypes factionToUpdate, List<Faction.FactionTypes> newAllies, List<Faction.FactionTypes> newEniemes)
+    {
+        //Find out which faction to update and grab it
+        Faction newFaction = FactionsMasterDic[factionToUpdate];
+
+        //Update Eneimes
+        newFaction.Enemies.Clear();
+        newFaction.Enemies = newEniemes;
+
+        //Update Allies
+        newFaction.Allies.Clear();
+        newFaction.Allies = newAllies;
+
+        //Reset our dictionary
+        FactionsMasterDic.Remove(factionToUpdate);
+        FactionsMasterDic.Add(factionToUpdate, newFaction); //Re-Add
     }
 }

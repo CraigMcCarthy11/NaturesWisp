@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class Faction {
+public class Faction : MonoBehaviour {
 
 	//Public
     public enum FactionTypes
@@ -12,14 +13,14 @@ public class Faction {
     };
 
     public FactionTypes myFaction;
-    public List<FactionTypes> Enemies = new List<FactionTypes>();
-    public List<FactionTypes> Allies = new List<FactionTypes>();
+    public List<FactionTypes> Enemies;
+    public List<FactionTypes> Allies;
 
     //Private
     
     
-    //Constructor
-    public Faction(FactionTypes myFaction, List<Faction.FactionTypes> Enemies, List<Faction.FactionTypes> Allies)
+    //Construct
+    public void InitFaction(FactionTypes myFaction, List<Faction.FactionTypes> Enemies, List<Faction.FactionTypes> Allies)
     {
         this.Enemies = Enemies;
         this.Allies = Allies;
