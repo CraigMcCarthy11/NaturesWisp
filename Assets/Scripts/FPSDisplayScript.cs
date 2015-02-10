@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
 using System.Collections;
 
+[RequireComponent(typeof(Text))]
+[RequireComponent(typeof(RectTransform))]
+[RequireComponent(typeof(CanvasRenderer))]
 public class FPSDisplayScript : MonoBehaviour
 {
 
-    // Attach this to a GUIText to make a frames/second indicator.
+    // Attach this to a Unity Text Object to make a frames/second indicator.
     //
     // It calculates frames/second over each updateInterval,
     // so the display does not keep changing wildly.
@@ -15,6 +19,8 @@ public class FPSDisplayScript : MonoBehaviour
     // by accumulating FPS for each frame. This way we end up with
     // correct overall FPS even if the interval renders something like
     // 5.5 frames.
+    //
+    //Note: This FPS Script is very accute but not in the editor
 
     public float updateInterval = 0.5F;
     public Text textField;

@@ -24,6 +24,7 @@ public class Biome : MonoBehaviour
     public int health;
     public GameManager gameManager;
     public List<GameObject> Neighbors = new List<GameObject>();
+    public List<GameObject> myWisps = new List<GameObject>();
     public int numberOfStartingWisps;
 
     //Private
@@ -141,6 +142,27 @@ public class Biome : MonoBehaviour
         var dstToA = Vector3.Distance(transform.position, a.transform.position);
         var dstToB = Vector3.Distance(transform.position, b.transform.position);
         return dstToA.CompareTo(dstToB);
+    }
+
+    void OnMouseDown()
+    {
+        Debug.Log("You've Clicked " + this.gameObject.name);
+    }
+
+    /// <summary>
+    /// If the wisp are assigned a target via this biome, loop through all of yours them tell'em to move
+    /// </summary>
+    /// <param name="Target">The GameObject to move towards</param>
+    public void AttackTarget(GameObject Target)
+    {
+        //Skip me if my wisps haven't spawend yet or......dead
+        if (myWisps.Count != 0)
+        {
+            foreach (GameObject wisp in myWisps)
+            {
+                StartCoroutine(wisp.GetComponent<Wisp>().MoveToTarget(Target.transform.position, 10));
+            }
+        }
     }
 
 }

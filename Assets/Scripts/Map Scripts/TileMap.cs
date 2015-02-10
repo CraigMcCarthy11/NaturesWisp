@@ -153,7 +153,7 @@ public class TileMap : MonoBehaviour
 
             //Add a box collider and set its size
             BoxCollider box = anchor.AddComponent<BoxCollider>().GetComponent<BoxCollider>();
-            box.size = new Vector3(1.5f, 1, 1.5f);
+            box.size = new Vector3(20f, 20f, 20f);
             GameManager.MapAnchors.Add(anchor);
         }
     }
