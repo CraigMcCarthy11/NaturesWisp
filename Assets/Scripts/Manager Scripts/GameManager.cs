@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
             //Give it an Instance of GameManager
             thisBiome.gameManager = this;
             //Generate its data
-            thisBiome.GenerateBiomeData();
+            thisBiome.GenerateBiomeData(uiManager);
 
             //Add the faction class based on what biome they are
             switch (thisBiome.myFaction)

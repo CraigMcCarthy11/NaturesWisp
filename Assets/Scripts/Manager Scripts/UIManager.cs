@@ -24,23 +24,29 @@ public class UIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (triggerUpdate = true)
+        if (triggerUpdate)
         {
             biomeCountsText.text = "Arctic: " + arcticCount + " Desert: " + desertCount + " Woodland: " + woodlandCount + " Tropical " + tropicalCount;
             triggerUpdate = false;
         }
 	}
 
-    public void GetBiomesInit(String type)
+    public void GetBiomesInit(Faction.FactionTypes type)
     {
-        triggerUpdate = true;
-        if (type == "Woodland")
-            woodlandCount++;
-        if (type == "Desert")
-            desertCount++;
-        if (type == "Tropical")
-            tropicalCount++;
-        if (type == "Arctic")
-            arcticCount++;
+        switch(type)
+        {
+            case Faction.FactionTypes.Arctic:
+                arcticCount++;
+                break;
+            case Faction.FactionTypes.Desert:
+                desertCount++;
+                break;
+            case Faction.FactionTypes.Tropical:
+                tropicalCount++;
+                break;
+            case Faction.FactionTypes.Woodland:
+                woodlandCount++;
+                break;
+        }
     }
 }

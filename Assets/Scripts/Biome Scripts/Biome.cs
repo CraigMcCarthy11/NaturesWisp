@@ -20,6 +20,7 @@ public class Biome : MonoBehaviour
 
     //Public
     public BiomeTypes myBiome;
+    public UIManager uiManager;
     public Faction.FactionTypes myFaction;
     public int health;
     public GameManager gameManager;
@@ -37,11 +38,12 @@ public class Biome : MonoBehaviour
     /// <summary>
     /// This fucntion generates data that will be asigned to this script when its instantiated 
     /// </summary>
-    public void GenerateBiomeData()
+    public void GenerateBiomeData(UIManager uiManager)
     {
         myBiome = RandomEnum<BiomeTypes>();
         myFaction = (Faction.FactionTypes)((int)myBiome); //As long as the enums are the same, type cast to an int, then set it as a enum of that type, should be the same!
-        gameManager.UpdateGUI(myBiome.ToString());
+        this.uiManager = uiManager;
+        uiManager.GetBiomesInit(myFaction);
         numberOfStartingWisps = UnityEngine.Random.Range(MIN_STARTING_WISPS, MAX_STARTING_WISPS);
         health = UnityEngine.Random.Range(MIN_STARTING_HEALTH, MAX_STARTING_HEALTH);
     }
