@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     public List<GameObject> SpawnedWisps = new List<GameObject>();
     public TileMap tilemap;
+    public UIManager uiManager;
     public Dictionary<Faction.FactionTypes, Faction> FactionsMasterDic = new Dictionary<Faction.FactionTypes, Faction>();
 
     //GameObjects
@@ -196,5 +197,10 @@ public class GameManager : MonoBehaviour {
         //Reset our dictionary
         FactionsMasterDic.Remove(factionToUpdate);
         FactionsMasterDic.Add(factionToUpdate, newFaction); //Re-Add
+    }
+
+    public void UpdateGUI(String type)
+    {
+        uiManager.GetBiomesInit(type);
     }
 }
