@@ -100,16 +100,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        StartCoroutine(FindEnemy());
+        //StartCoroutine(FindEnemy());
     }
 
     IEnumerator BuildBiomes()
     {
-        for (int i = 0; i < MapAnchors.Count; i++)
-        {
-            MapAnchors[i].GetComponent<Biome>().FindAndSetNeighbors();
-        }
-
         //Setting init data and spawning wisps with it
         foreach (GameObject square in MapAnchors)
         {
@@ -135,6 +130,11 @@ public class GameManager : MonoBehaviour
                 case Faction.FactionTypes.Woodland:
                     square.AddComponent<Faction>().InitFaction(Faction.FactionTypes.Woodland, FactionsMasterDic[Faction.FactionTypes.Woodland].Enemies, FactionsMasterDic[Faction.FactionTypes.Woodland].Allies);
                     break;
+            }
+
+            for (int i = 0; i < MapAnchors.Count; i++)
+            {
+                MapAnchors[i].GetComponent<Biome>().FindAndSetNeighbors();
             }
 
             //Spawn it and make a pretty effect

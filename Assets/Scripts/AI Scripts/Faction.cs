@@ -26,4 +26,20 @@ public class Faction : MonoBehaviour {
         this.Allies = Allies;
         this.myFaction = myFaction;
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="potentialEnemy"></param>
+    /// <returns>if the gameobject is an emeny returns true</returns>
+    public bool isEnemyOrFoe(GameObject potentialEnemy)
+    {
+        if (Enemies[0] == potentialEnemy.GetComponent<Biome>().myFaction)
+            return true;
+        //Then check the secound
+        if (Enemies[1] == potentialEnemy.GetComponent<Biome>().myFaction)
+            return true;
+        else
+        return false;
+    }
 }

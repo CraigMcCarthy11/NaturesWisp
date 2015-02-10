@@ -172,7 +172,7 @@ MonoBehaviour:
   touchScrollOffset: .100000001
   touchRotateOffset: 1.13999999
   keyBoardControl: 1
-  mouseControl: 0
+  mouseControl: 1
   touchControl: 1
   allowFollow: 1
 --- !u!81 &46098547
@@ -1789,7 +1789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &191872050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2245,7 +2245,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 28e29192f45cb3542a29f78368635e90, type: 2}
       propertyPath: mouseControl
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 28e29192f45cb3542a29f78368635e90, type: 2}
       propertyPath: touchRotateOffset

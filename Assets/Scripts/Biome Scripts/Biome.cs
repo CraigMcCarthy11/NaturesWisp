@@ -27,6 +27,7 @@ public class Biome : MonoBehaviour
     public List<GameObject> Neighbors = new List<GameObject>();
     public List<GameObject> myWisps = new List<GameObject>();
     public int numberOfStartingWisps;
+    public int angerValue = 40;
 
     //Private
     private int numberOfNeighborsToHave = 8;
@@ -131,6 +132,9 @@ public class Biome : MonoBehaviour
             for (int i = 0; i < numberOfNeighborsToHave; i++)
             {
                 Neighbors.Add(TempNeighbors[i + 1]);
+                //if this gameobjects Neighbor is a enemy 
+                if (this.gameObject.GetComponent<Faction>().isEnemyOrFoe(TempNeighbors[i + 1]))
+                    angerValue += 10;
             }
         }
         catch (System.Exception ex)

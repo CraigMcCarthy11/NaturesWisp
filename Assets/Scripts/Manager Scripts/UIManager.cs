@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 
-public class UIManager : MonoBehaviour {
+public class UIManager : MonoBehaviour
+{
 
     public GameObject biomeCounts;
     public GameManager gameManager;
@@ -17,23 +18,25 @@ public class UIManager : MonoBehaviour {
     private int tropicalCount;
     private bool triggerUpdate = false;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         biomeCountsText = biomeCounts.GetComponentInChildren<Text>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (triggerUpdate)
         {
             biomeCountsText.text = "Arctic: " + arcticCount + " Desert: " + desertCount + " Woodland: " + woodlandCount + " Tropical " + tropicalCount;
             triggerUpdate = false;
         }
-	}
+    }
 
     public void GetBiomesInit(Faction.FactionTypes type)
     {
-        switch(type)
+        switch (type)
         {
             case Faction.FactionTypes.Arctic:
                 arcticCount++;
