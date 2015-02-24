@@ -16,6 +16,7 @@ public class Wisp : MonoBehaviour {
     public Want myWant;
     public Action myAction;
     public float idleRotX,idleRotY,idleRotZ;
+    public GameManager gameManager;
 
     //All the Enum's used in this class
     #region Wisp Enumorations
@@ -62,8 +63,9 @@ public class Wisp : MonoBehaviour {
     /// <summary>
     /// Sets init Data, This is called right after instatiation 
     /// </summary>
-    public void BuildWispWithData(int health, Faction.FactionTypes faction, Action myAction, Attitude myAttitude, Want myWant, GameObject Home)
+    public void BuildWispWithData(int health, Faction.FactionTypes faction, Action myAction, Attitude myAttitude, Want myWant, GameObject Home, GameManager gameManager)
     {
+        this.gameManager = gameManager;
         this.myAction = myAction;
         this.myAttitude = myAttitude;
         this.myWant = myWant;
@@ -170,20 +172,27 @@ public class Wisp : MonoBehaviour {
     private void AnimateVisuals()
     {
         //Assigning a color
-        ParticleAnimator particleAnimatior = this.gameObject.GetComponent<ParticleAnimator>();
         switch (faction.ToString())
         {
             case "Arctic":
-                particleAnimatior.colorAnimation = HexToColorArray("0AF3FF",5);
+                GameObject obj = Instantiate(gameManager.WispHaloPrefabs[0], this.transform.position, Quaternion.identity) as GameObject;
+                obj.transform.parent = this.gameObject.transform;
+                this.gameObject.renderer.material.color = HexToColor("0AF3FF");
                 break;
             case "Desert":
-                particleAnimatior.colorAnimation = HexToColorArray("FFD900",5);
+                GameObject obj2 = Instantiate(gameManager.WispHaloPrefabs[1], this.transform.position, Quaternion.identity) as GameObject;
+                obj2.transform.parent = this.gameObject.transform;
+                this.gameObject.renderer.material.color = HexToColor("FFD900");
                 break;
             case "Tropical":
-                particleAnimatior.colorAnimation = HexToColorArray("2BFF00",5);
+                GameObject obj3 = Instantiate(gameManager.WispHaloPrefabs[2], this.transform.position, Quaternion.identity) as GameObject;
+                obj3.transform.parent = this.gameObject.transform;
+                this.gameObject.renderer.material.color = HexToColor("2BFF00");
                 break;
             case "Woodland":
-                particleAnimatior.colorAnimation = HexToColorArray("826042",5);
+                GameObject obj4 = Instantiate(gameManager.WispHaloPrefabs[3], this.transform.position, Quaternion.identity) as GameObject;
+                obj4.transform.parent = this.gameObject.transform;
+                this.gameObject.renderer.material.color = HexToColor("826042");
                 break;
             default:
                 Debug.LogError("Could not set color, no valid faction type set");

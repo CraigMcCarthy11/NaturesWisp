@@ -127,14 +127,24 @@ public class Biome : MonoBehaviour
         try
         {
             List<GameObject> TempNeighbors = new List<GameObject>(GameManager.MapAnchors);
-            TempNeighbors.Sort(SortByDistance);
+            GameManager.MapAnchors.Sort(SortByDistance);
             //Sort the top 5 (closest) in the list as Neighbors NOTE: Skipping the first one in the list because it myself
             for (int i = 0; i < numberOfNeighborsToHave; i++)
             {
-                Neighbors.Add(TempNeighbors[i + 1]);
-                //if this gameobjects Neighbor is a enemy 
-                if (this.gameObject.GetComponent<Faction>().isEnemyOrFoe(TempNeighbors[i + 1]))
-                    angerValue += 10;
+                    Neighbors.Add(TempNeighbors[i]);
+                    /*
+                    //if this gameobjects Neighbor is a enemy
+                    try
+                    {
+                        //if (this.gameObject.GetComponent<Faction>().isEnemyOrFoe(TempNeighbors[i]))
+                        //angerValue += 10;
+                    }
+                    catch (System.Exception ex)
+                    {
+                        Debug.LogError("[SELF] Error finding foe on: " + GameManager.MapAnchors[i + 1].name + " because: " + ex);
+                    }
+                     */
+                
             }
         }
         catch (System.Exception ex)

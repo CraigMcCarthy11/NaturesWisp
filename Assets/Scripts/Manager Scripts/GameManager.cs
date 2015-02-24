@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public TileMap tilemap;
     public UIManager uiManager;
     public Dictionary<Faction.FactionTypes, Faction> FactionsMasterDic = new Dictionary<Faction.FactionTypes, Faction>();
+    public GameObject[] WispHaloPrefabs;
 
     //GameObjects
     public GameObject WispPrefab;
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Texture Built");
         tilemap.CalclateGridCenterPoints();
         Debug.Log("Anchors Spawned");
-        StartCoroutine(BuildBiomes());
+        BuildBiomes();
         Debug.Log("Created Biome");
     }
 
@@ -103,7 +104,7 @@ public class GameManager : MonoBehaviour
         //StartCoroutine(FindEnemy());
     }
 
-    IEnumerator BuildBiomes()
+    void BuildBiomes()
     {
         //Setting init data and spawning wisps with it
         foreach (GameObject square in MapAnchors)
@@ -132,31 +133,37 @@ public class GameManager : MonoBehaviour
                     break;
             }
 
-            for (int i = 0; i < MapAnchors.Count; i++)
-            {
-                MapAnchors[i].GetComponent<Biome>().FindAndSetNeighbors();
-            }
-
             //Spawn it and make a pretty effect
             StartCoroutine(thisBiome.SpawnVisuals(thisBiome.myFaction));
 
             //Spawn Wisps based on random number
             for (int i = 0; i < thisBiome.numberOfStartingWisps; i++)
             {
-                yield return new WaitForSeconds(0.5f);
+                //yield return new WaitForSeconds(0.5f);
                 SpawnWisp(thisBiome.myFaction, square);
             }
 
         }
         Debug.Log("Created Biomes");
         Debug.Log("Spawned Wisps");
+        SetNeighbors();
+    }
+
+    public void SetNeighbors()
+    {
+        //TODO: try for each
+
+        for (int i = 0; i < MapAnchors.Count; i++)
+        {
+            MapAnchors[i].GetComponent<Biome>().FindAndSetNeighbors();
+        }
     }
 
     public void SpawnWisp(Faction.FactionTypes setFaction, GameObject Home)
     {
         //Spawn in Scene, on the at a random point in the sky
         float z = UnityEngine.Random.Range(0f, 250f);
-        float y = Camera.mainCamera.transform.position.y - 20; //Spawn a little below the player
+        float y = Camera.main.transform.position.y - 20; //Spawn a little below the player
         float x = UnityEngine.Random.Range(22f, 250f);
         Vector3 RandomSpawnPos = new Vector3(x, y, z);
 
@@ -181,7 +188,8 @@ public class GameManager : MonoBehaviour
             myAction,
             myAttitude,
             myWant,
-            Home                               //Its Home GameObject (a MapAnchor) 
+            Home,                               //Its Home GameObject (a MapAnchor)
+            this
             );
 
         //Add to our master list 
