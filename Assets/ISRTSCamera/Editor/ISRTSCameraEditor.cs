@@ -59,7 +59,7 @@ public class ISRTSCameraEditor : Editor {
 		if (mouseSetting) {
 			mCam.mouseControl = EditorGUILayout.Toggle("\tEnabled",mCam.mouseControl);
 			if(mCam.mouseControl){
-				if(EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android || EditorUserBuildSettings.activeBuildTarget == BuildTarget.iPhone || EditorUserBuildSettings.activeBuildTarget == BuildTarget.MetroPlayer){
+				if(EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android || EditorUserBuildSettings.activeBuildTarget == BuildTarget.iOS || EditorUserBuildSettings.activeBuildTarget == BuildTarget.MetroPlayer){
 					EditorGUILayout.HelpBox("You currently are build for a mobile device,you must disable mouse control when you running on your mobile device.",MessageType.Warning);
 				}
 				mCam.moveOffset = EditorGUILayout.FloatField("\tMove Offset",mCam.moveOffset);

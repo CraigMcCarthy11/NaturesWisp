@@ -132,6 +132,8 @@ public class Biome : MonoBehaviour
             for (int i = 0; i < numberOfNeighborsToHave; i++)
             {
                     Neighbors.Add(TempNeighbors[i]);
+                    Debug.Log("Added Neighbor: " + this.gameObject.name);
+                Debug.Log("# of waypoints: " + Neighbors.Count);
                     /*
                     //if this gameobjects Neighbor is a enemy
                     try
@@ -144,7 +146,6 @@ public class Biome : MonoBehaviour
                         Debug.LogError("[SELF] Error finding foe on: " + GameManager.MapAnchors[i + 1].name + " because: " + ex);
                     }
                      */
-                
             }
         }
         catch (System.Exception ex)

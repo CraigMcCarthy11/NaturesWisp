@@ -20,7 +20,7 @@ public class TileMouseOver : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
 
-        if (collider.Raycast(ray, out hitInfo, Mathf.Infinity))
+        if (GetComponent<Collider>().Raycast(ray, out hitInfo, Mathf.Infinity))
         {
             //Fancy math to find the point relative to the local matrix instead of world (thanks unity)
             transform.worldToLocalMatrix.MultiplyPoint3x4(hitInfo.point);

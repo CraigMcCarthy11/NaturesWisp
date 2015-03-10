@@ -91,7 +91,7 @@ public class ISRTSCamera : MonoBehaviour {
 	void Awake () {
 		self = this;
 		selfT = transform;
-		selfC = camera;
+		selfC = GetComponent<Camera>();
 		groundMask = 1<<groundLayer;
 	}
 	

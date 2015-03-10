@@ -177,22 +177,22 @@ public class Wisp : MonoBehaviour {
             case "Arctic":
                 GameObject obj = Instantiate(gameManager.WispHaloPrefabs[0], this.transform.position, Quaternion.identity) as GameObject;
                 obj.transform.parent = this.gameObject.transform;
-                this.gameObject.renderer.material.color = HexToColor("0AF3FF");
+                this.gameObject.GetComponent<Renderer>().material.color = HexToColor("0AF3FF");
                 break;
             case "Desert":
                 GameObject obj2 = Instantiate(gameManager.WispHaloPrefabs[1], this.transform.position, Quaternion.identity) as GameObject;
                 obj2.transform.parent = this.gameObject.transform;
-                this.gameObject.renderer.material.color = HexToColor("FFD900");
+                this.gameObject.GetComponent<Renderer>().material.color = HexToColor("FFD900");
                 break;
             case "Tropical":
                 GameObject obj3 = Instantiate(gameManager.WispHaloPrefabs[2], this.transform.position, Quaternion.identity) as GameObject;
                 obj3.transform.parent = this.gameObject.transform;
-                this.gameObject.renderer.material.color = HexToColor("2BFF00");
+                this.gameObject.GetComponent<Renderer>().material.color = HexToColor("2BFF00");
                 break;
             case "Woodland":
                 GameObject obj4 = Instantiate(gameManager.WispHaloPrefabs[3], this.transform.position, Quaternion.identity) as GameObject;
                 obj4.transform.parent = this.gameObject.transform;
-                this.gameObject.renderer.material.color = HexToColor("826042");
+                this.gameObject.GetComponent<Renderer>().material.color = HexToColor("826042");
                 break;
             default:
                 Debug.LogError("Could not set color, no valid faction type set");
