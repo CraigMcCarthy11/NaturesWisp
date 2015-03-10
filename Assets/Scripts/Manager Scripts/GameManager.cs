@@ -151,12 +151,9 @@ public class GameManager : MonoBehaviour
 
     public void SetNeighbors()
     {
-        //TODO: try for each
-
-        for (int i = 0; i < MapAnchors.Count; i++)
-        {
-            MapAnchors[i].GetComponent<Biome>().FindAndSetNeighbors();
-        }
+        foreach(GameObject biome in MapAnchors)
+            biome.GetComponent<Biome>().FindAndSetNeighbors();
+        
     }
 
     public void SpawnWisp(Faction.FactionTypes setFaction, GameObject Home)
