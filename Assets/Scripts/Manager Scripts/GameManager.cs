@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public GameObject WispPrefab;
     public List<GameObject> BiomePrefabs = new List<GameObject>();
     public GameObject DustPrefab;
+    public GameObject SwapBiome1;
+    public GameObject SwapBiome2;
 
     void Start()
     {
@@ -102,6 +104,37 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //StartCoroutine(FindEnemy());
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            // if left button pressed... 
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit; if (Physics.Raycast(ray, out hit))
+            {
+                if (SwapBiome1 == null)
+                {
+                    SwapBiome1 = hit.transform.gameObject;
+                    Debug.Log("You got biome 1");
+                    return;
+                }
+                if (SwapBiome2 == null && SwapBiome1 != hit.transform.gameObject)
+                {
+                    SwapBiome2 = hit.transform.gameObject;
+                    Debug.Log("You got biome 2");
+                }
+                if (SwapBiome1 != null && SwapBiome2 != null)
+                {
+                    Vector3 temp = Vector3.zero;
+                    temp = SwapBiome1.transform.localPosition;
+                    SwapBiome1.transform.localPosition = SwapBiome2.transform.localPosition;
+                    SwapBiome2.transform.localPosition = temp;
+                    temp = Vector3.zero;
+                    SwapBiome1 = null;
+                    SwapBiome2 = null;
+                }
+            }
+        } 
+
     }
 
     void BuildBiomes()
@@ -248,7 +281,5 @@ public class GameManager : MonoBehaviour
                 Debug.LogError("[SELF] Attacker could find valid target, Does it have eniems? " + ex);
             }
         //}
-        
-
     }
 }

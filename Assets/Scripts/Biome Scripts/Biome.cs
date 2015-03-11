@@ -161,10 +161,10 @@ public class Biome : MonoBehaviour
         return dstToA.CompareTo(dstToB);
     }
 
-    void OnMouseDown()
+    /*void OnMouseDown()
     {
         Debug.Log("You've Clicked " + this.gameObject.name);
-    }
+    }*/
 
     /// <summary>
     /// If the wisp are assigned a target via this biome, loop through all of yours them tell'em to move
