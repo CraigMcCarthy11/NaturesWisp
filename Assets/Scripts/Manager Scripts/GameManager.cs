@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour
     public GameObject SwapBiome1;
     public GameObject SwapBiome2;
 
+    //bools for what skill is about to be used 
+    public bool bombBool = false;
+    public bool swapBool = false;
+    public bool wispAddBool = false;
+
     void Start()
     {
         SetFactions();
@@ -104,33 +109,50 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //StartCoroutine(FindEnemy());
-
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && bombBool == true){
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit; if (Physics.Raycast(ray, out hit))
+            {
+                Destroy(hit.transform.gameObject);
+            }
+        }
+        if (Input.GetMouseButtonDown(0) && wispAddBool == true)
+        {
+            /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit; if (Physics.Raycast(ray, out hit))
+            {
+                Destroy(hit.transform.gameObject);
+            }*/
+        }
+        if (Input.GetMouseButtonDown(0) && swapBool == true)
         {
             // if left button pressed... 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit; if (Physics.Raycast(ray, out hit))
             {
-                if (SwapBiome1 == null)
+                if (hit.transform.gameObject.name != "TileMap")
                 {
-                    SwapBiome1 = hit.transform.gameObject;
-                    Debug.Log("You got biome 1");
-                    return;
-                }
-                if (SwapBiome2 == null && SwapBiome1 != hit.transform.gameObject)
-                {
-                    SwapBiome2 = hit.transform.gameObject;
-                    Debug.Log("You got biome 2");
-                }
-                if (SwapBiome1 != null && SwapBiome2 != null)
-                {
-                    Vector3 temp = Vector3.zero;
-                    temp = SwapBiome1.transform.localPosition;
-                    SwapBiome1.transform.localPosition = SwapBiome2.transform.localPosition;
-                    SwapBiome2.transform.localPosition = temp;
-                    temp = Vector3.zero;
-                    SwapBiome1 = null;
-                    SwapBiome2 = null;
+                    if (SwapBiome1 == null)
+                    {
+                        SwapBiome1 = hit.transform.gameObject;
+                        Debug.Log("You got biome 1");
+                        return;
+                    }
+                    if (SwapBiome2 == null && SwapBiome1 != hit.transform.gameObject)
+                    {
+                        SwapBiome2 = hit.transform.gameObject;
+                        Debug.Log("You got biome 2");
+                    }
+                    if (SwapBiome1 != null && SwapBiome2 != null)
+                    {
+                        Vector3 temp = Vector3.zero;
+                        temp = SwapBiome1.transform.localPosition;
+                        SwapBiome1.transform.localPosition = SwapBiome2.transform.localPosition;
+                        SwapBiome2.transform.localPosition = temp;
+                        temp = Vector3.zero;
+                        SwapBiome1 = null;
+                        SwapBiome2 = null;
+                    }
                 }
             }
         } 

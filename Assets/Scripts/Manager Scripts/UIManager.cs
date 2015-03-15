@@ -42,6 +42,17 @@ public class UIManager : MonoBehaviour
         biomeCountsText.text = "Arctic: " + arcticCount + " Desert: " + desertCount + " Woodland: " + woodlandCount + " Tropical " + tropicalCount;
 		timer += Time.deltaTime;
 		timerText.GetComponentInChildren<Text>().text = "Timer: " + (int)timer;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit; if (Physics.Raycast(ray, out hit))
+            {
+                //Spawn buttons over that target
+                
+                //if you press each button if turns on the corresponding bool in GM and then closes the buttons
+            }
+        }
     }
 
     public void GetBiomesInit(Faction.FactionTypes type)
