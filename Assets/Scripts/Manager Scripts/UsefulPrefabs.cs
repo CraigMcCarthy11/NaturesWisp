@@ -20,7 +20,6 @@ public class UsefulPrefabs : MonoBehaviour
                 //Tell unity not to destroy this object when loading a new scene!
                 DontDestroyOnLoad(gInstance.gameObject);
             }
-
             return gInstance;
         }
     }

@@ -105,26 +105,45 @@ public class GameManager : MonoBehaviour
         FactionsMasterDic.Add(Faction.FactionTypes.Tropical, Tropical);
         #endregion
     }
-
+    public void wispButtonPressed()
+    {
+        wispAddBool = true;
+        Debug.Log("Wisp Button");   
+    }
+    public void swapButtonPressed()
+    {
+        swapBool = true;
+        Debug.Log("Swap Button");  
+    }
+    public void bombButtonPressed()
+    {
+        bombBool = true;
+        Debug.Log("Destroy Button");
+    }
     void Update()
     {
         //StartCoroutine(FindEnemy());
-        if (Input.GetMouseButtonDown(0) && bombBool == true){
+        if (Input.GetMouseButtonDown(0) && bombBool == true && uiManager.bombsCount > 0)
+        {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit; if (Physics.Raycast(ray, out hit))
             {
                 Destroy(hit.transform.gameObject);
             }
+            uiManager.bombsCount--;
+            bombBool = false;
         }
-        if (Input.GetMouseButtonDown(0) && wispAddBool == true)
+        if (Input.GetMouseButtonDown(0) && wispAddBool == true && uiManager.extraWispsCount > 0)
         {
             /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit; if (Physics.Raycast(ray, out hit))
             {
                 Destroy(hit.transform.gameObject);
             }*/
+            uiManager.extraWispsCount--;
+            wispAddBool = false;
         }
-        if (Input.GetMouseButtonDown(0) && swapBool == true)
+        if (Input.GetMouseButtonDown(0) && swapBool == true && uiManager.swapCount > 0)
         {
             // if left button pressed... 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -155,6 +174,8 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
+            uiManager.swapCount--;
+            swapBool = false;
         } 
 
     }

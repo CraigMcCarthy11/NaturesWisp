@@ -14,6 +14,10 @@ public class UIManager : MonoBehaviour
 	public GameObject extraWispsLeft;
 	public GameObject bombsLeft;
 	public GameObject swapsLeft;
+    //Button Prefabs
+    public GameObject WispButtonPrefab;
+    public GameObject SwapButtonPrefab;
+    public GameObject BombButtonPrefab;
 
     private Text biomeCountsText;
     private int arcticCount;
@@ -23,17 +27,14 @@ public class UIManager : MonoBehaviour
     private bool triggerUpdate = false;
 
 	private float timer;
-	private int bombsCount = 2;
-	private int extraWispsCount = 5;
-	private int swapCount = 3;
+	public int bombsCount = 2;
+	public int extraWispsCount = 5;
+	public int swapCount = 3;
 
     // Use this for initialization
     void Start()
     {
         biomeCountsText = biomeCounts.GetComponentInChildren<Text>();
-		extraWispsLeft.GetComponentInChildren<Text>().text = "ExtraWisps: " + extraWispsCount;
-		bombsLeft.GetComponentInChildren<Text> ().text = "Bombs Left: " + bombsCount;
-		swapsLeft.GetComponentInChildren<Text> ().text = "Swaps: " + swapCount;
     }
 
     // Update is called once per frame
@@ -42,17 +43,9 @@ public class UIManager : MonoBehaviour
         biomeCountsText.text = "Arctic: " + arcticCount + " Desert: " + desertCount + " Woodland: " + woodlandCount + " Tropical " + tropicalCount;
 		timer += Time.deltaTime;
 		timerText.GetComponentInChildren<Text>().text = "Timer: " + (int)timer;
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit; if (Physics.Raycast(ray, out hit))
-            {
-                //Spawn buttons over that target
-                
-                //if you press each button if turns on the corresponding bool in GM and then closes the buttons
-            }
-        }
+        extraWispsLeft.GetComponentInChildren<Text>().text = "ExtraWisps: " + extraWispsCount;
+        bombsLeft.GetComponentInChildren<Text>().text = "Bombs Left: " + bombsCount;
+        swapsLeft.GetComponentInChildren<Text>().text = "Swaps: " + swapCount;
     }
 
     public void GetBiomesInit(Faction.FactionTypes type)
