@@ -536,6 +536,7 @@ MonoBehaviour:
   extraWispsLeft: {fileID: 1150593117}
   bombsLeft: {fileID: 1474742917}
   swapsLeft: {fileID: 1542763356}
+  powerupTextTimers: {fileID: 1186427814}
   WispButtonPrefab: {fileID: 173462, guid: 94705ff7b59f0794897964cbd2697f46, type: 2}
   SwapButtonPrefab: {fileID: 132234, guid: a7fee5a2b406f104eabf41de2efac9c6, type: 2}
   BombButtonPrefab: {fileID: 112326, guid: d8689707844c8c34ca0bee95431170b2, type: 2}
@@ -647,7 +648,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22440250, guid: a7fee5a2b406f104eabf41de2efac9c6, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22440250, guid: a7fee5a2b406f104eabf41de2efac9c6, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -705,6 +706,18 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       objectReference: {fileID: 0}
+    - target: {fileID: 11419092, guid: a7fee5a2b406f104eabf41de2efac9c6, type: 2}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: .0156862754
+      objectReference: {fileID: 0}
+    - target: {fileID: 11419092, guid: a7fee5a2b406f104eabf41de2efac9c6, type: 2}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: .968627512
+      objectReference: {fileID: 0}
+    - target: {fileID: 11419092, guid: a7fee5a2b406f104eabf41de2efac9c6, type: 2}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: .0156862754
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a7fee5a2b406f104eabf41de2efac9c6, type: 2}
   m_IsPrefabParent: 0
@@ -758,7 +771,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22494220, guid: 94705ff7b59f0794897964cbd2697f46, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 50
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 22494220, guid: 94705ff7b59f0794897964cbd2697f46, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -815,6 +828,18 @@ Prefab:
     - target: {fileID: 11458388, guid: 94705ff7b59f0794897964cbd2697f46, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 11458388, guid: 94705ff7b59f0794897964cbd2697f46, type: 2}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: .011764707
+      objectReference: {fileID: 0}
+    - target: {fileID: 11458388, guid: 94705ff7b59f0794897964cbd2697f46, type: 2}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: .976470649
+      objectReference: {fileID: 0}
+    - target: {fileID: 11458388, guid: 94705ff7b59f0794897964cbd2697f46, type: 2}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: .011764707
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94705ff7b59f0794897964cbd2697f46, type: 2}
@@ -1005,11 +1030,12 @@ RectTransform:
   - {fileID: 366386526}
   - {fileID: 214055595}
   - {fileID: 694888907}
+  - {fileID: 1186427815}
   m_Father: {fileID: 191872054}
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: 0}
   m_AnchorMax: {x: .5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -2}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 970, y: 90.9800034}
   m_Pivot: {x: .5, y: 0}
 --- !u!114 &624426903
@@ -1084,7 +1110,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22445182, guid: d8689707844c8c34ca0bee95431170b2, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 22445182, guid: d8689707844c8c34ca0bee95431170b2, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -1141,6 +1167,18 @@ Prefab:
     - target: {fileID: 11457230, guid: d8689707844c8c34ca0bee95431170b2, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457230, guid: d8689707844c8c34ca0bee95431170b2, type: 2}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457230, guid: d8689707844c8c34ca0bee95431170b2, type: 2}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: .996078491
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457230, guid: d8689707844c8c34ca0bee95431170b2, type: 2}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d8689707844c8c34ca0bee95431170b2, type: 2}
@@ -1376,6 +1414,72 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1150593117}
+--- !u!1 &1186427814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1186427815}
+  - 222: {fileID: 1186427817}
+  - 114: {fileID: 1186427816}
+  m_Layer: 5
+  m_Name: poweruptimers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1186427815
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1186427814}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 624426902}
+  m_RootOrder: 3
+  m_AnchorMin: {x: .5, y: 0}
+  m_AnchorMax: {x: .5, y: 0}
+  m_AnchoredPosition: {x: 0, y: -28}
+  m_SizeDelta: {x: 296, y: 51}
+  m_Pivot: {x: .5, y: 0}
+--- !u!114 &1186427816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1186427814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: .996078432, g: .996078432, b: .996078432, a: 1}
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: b0e9428c92d53c6478341933679df68b, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Text to determine powerup timers
+--- !u!222 &1186427817
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1186427814}
 --- !u!1 &1223917754
 GameObject:
   m_ObjectHideFlags: 0

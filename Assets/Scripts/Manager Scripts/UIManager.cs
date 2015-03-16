@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
 	public GameObject extraWispsLeft;
 	public GameObject bombsLeft;
 	public GameObject swapsLeft;
+    public GameObject powerupTextTimers;
+
     //Button Prefabs
     public GameObject WispButtonPrefab;
     public GameObject SwapButtonPrefab;
@@ -59,6 +61,7 @@ public class UIManager : MonoBehaviour
         extraWispsLeft.GetComponentInChildren<Text>().text = "ExtraWisps: " + extraWispsCount;
         bombsLeft.GetComponentInChildren<Text>().text = "Bombs Left: " + bombsCount;
         swapsLeft.GetComponentInChildren<Text>().text = "Swaps: " + swapCount;
+        powerupTextTimers.GetComponentInChildren<Text>().text = "Wisp +1 = " + (int)wispTimer + "/30" + " || Swap +1 = " + (int)swapTimer + "/45" + " || Bomb +1 = " + (int)bombTimer + "/250";
     }
     void addPowerups()
     {
