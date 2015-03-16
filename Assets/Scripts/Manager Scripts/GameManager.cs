@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
         bombBool = true;
         Debug.Log("Destroy Button");
     }
+
     void Update()
     {
         //StartCoroutine(FindEnemy());

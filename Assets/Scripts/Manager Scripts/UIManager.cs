@@ -26,7 +26,12 @@ public class UIManager : MonoBehaviour
     private int tropicalCount;
     private bool triggerUpdate = false;
 
-	private float timer;
+    //for getting powerups
+	private float wispTimer;
+    private float swapTimer;
+    private float bombTimer;
+    private float overallTimer;
+
 	public int bombsCount = 2;
 	public int extraWispsCount = 5;
 	public int swapCount = 3;
@@ -41,13 +46,38 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         biomeCountsText.text = "Arctic: " + arcticCount + " Desert: " + desertCount + " Woodland: " + woodlandCount + " Tropical " + tropicalCount;
-		timer += Time.deltaTime;
-		timerText.GetComponentInChildren<Text>().text = "Timer: " + (int)timer;
+
+        overallTimer += Time.deltaTime;
+        wispTimer += Time.deltaTime;
+        swapTimer += Time.deltaTime;
+        bombTimer += Time.deltaTime;
+        if (wispTimer >= 30 || swapTimer >= 45 || bombTimer >= 250)
+        {
+            addPowerups();
+        }
+        timerText.GetComponentInChildren<Text>().text = "Timer: " + (int)overallTimer;
         extraWispsLeft.GetComponentInChildren<Text>().text = "ExtraWisps: " + extraWispsCount;
         bombsLeft.GetComponentInChildren<Text>().text = "Bombs Left: " + bombsCount;
         swapsLeft.GetComponentInChildren<Text>().text = "Swaps: " + swapCount;
     }
-
+    void addPowerups()
+    {
+        if (wispTimer >= 30)
+        {
+            extraWispsCount++;
+            wispTimer = 0;
+        }
+        if (swapTimer >= 45)
+        {
+            swapCount++;
+            swapTimer = 0;
+        }
+        if (bombTimer >= 250)
+        {
+            bombsCount++;
+            bombTimer = 0;
+        }
+    }
     public void GetBiomesInit(Faction.FactionTypes type)
     {
         switch (type)
