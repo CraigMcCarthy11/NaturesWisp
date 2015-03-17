@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager;
     public Dictionary<Faction.FactionTypes, Faction> FactionsMasterDic = new Dictionary<Faction.FactionTypes, Faction>();
     public GameObject[] WispHaloPrefabs;
-
+    public AudioManager audioMan;
     //GameObjects
     public GameObject WispPrefab;
     public List<GameObject> BiomePrefabs = new List<GameObject>();
@@ -24,6 +24,12 @@ public class GameManager : MonoBehaviour
     public bool bombBool = false;
     public bool swapBool = false;
     public bool wispAddBool = false;
+
+    public Material materialHighlight;
+    private List<Material> materialOriginals = new List<Material>();
+    public Shader shader1;
+    private Shader shader2;
+    
 
     void Start()
     {
@@ -37,6 +43,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("Anchors Spawned");
         BuildBiomes();
         Debug.Log("Created Biome");
+        audioMan.PlayAudio(audioMan.SoundClips[0], Camera.main.transform.position);
+        shader2 = Shader.Find("Diffuse");
     }
 
     public void SetFactions()
@@ -156,6 +164,10 @@ public class GameManager : MonoBehaviour
                     {
                         SwapBiome1 = hit.transform.gameObject;
                         Debug.Log("You got biome 1");
+                         foreach(Renderer r in SwapBiome1.GetComponentsInChildren<Renderer>()){
+                             materialOriginals.Add(r.material);
+                             r.material = materialHighlight;
+                           }
                         return;
                     }
                     if (SwapBiome2 == null && SwapBiome1 != hit.transform.gameObject)
@@ -165,6 +177,12 @@ public class GameManager : MonoBehaviour
                     }
                     if (SwapBiome1 != null && SwapBiome2 != null)
                     {
+                        int i = 0;
+                        foreach (Renderer r in SwapBiome1.GetComponentsInChildren<Renderer>())
+                        {
+                            r.material = materialOriginals[i];
+                            i++;
+                        }
                         Vector3 temp = Vector3.zero;
                         temp = SwapBiome1.transform.localPosition;
                         SwapBiome1.transform.localPosition = SwapBiome2.transform.localPosition;

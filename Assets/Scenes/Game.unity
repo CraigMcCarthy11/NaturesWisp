@@ -379,6 +379,7 @@ MonoBehaviour:
   - {fileID: 100000, guid: d97aff4605f6d6c45be31fe3600cd200, type: 2}
   - {fileID: 100000, guid: ec9ee203c4a174d449c5c3987e36be0d, type: 2}
   - {fileID: 100000, guid: 280e873851430aa4ab7bf84eb8b80868, type: 2}
+  audioMan: {fileID: 1223917755}
   WispPrefab: {fileID: 100000, guid: 7f58718d52e71bc4cba2308387712569, type: 2}
   BiomePrefabs:
   - {fileID: 100000, guid: 6f6d16f228f91734db55400c5396ae7b, type: 2}
@@ -391,6 +392,8 @@ MonoBehaviour:
   bombBool: 0
   swapBool: 0
   wispAddBool: 0
+  materialHighlight: {fileID: 2100000, guid: 82fc4dcc62198804fbc66385831c74f6, type: 2}
+  shader1: {fileID: 4800000, guid: df1d16fcffce5ce49a9eeeb861cceccc, type: 3}
 --- !u!4 &149285071
 Transform:
   m_ObjectHideFlags: 0
@@ -1507,7 +1510,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db804e9eb48d84f4c93e53705edafb90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SoundClips: []
+  SoundClips:
+  - {fileID: 8300000, guid: 1e88dce3f57817544ab3a160f3bf3cd0, type: 3}
 --- !u!4 &1223917756
 Transform:
   m_ObjectHideFlags: 0
