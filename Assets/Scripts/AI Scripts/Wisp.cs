@@ -12,6 +12,7 @@ public class Wisp : MonoBehaviour {
     public int RotationSpeed = 90;
     public int MovemnetSpeed = 15;
     public bool isMoving;
+    public float speed = 2;
     public Attitude myAttitude;
     public Want myWant;
     public Action myAction;
@@ -157,6 +158,13 @@ public class Wisp : MonoBehaviour {
 
     private void Fighting()
     {
+        if(transform.position == Target.transform.position)
+        {
+            this.transform.RotateAround(Target.transform.position, new Vector3(idleRotX + UnityEngine.Random.Range(0, 360), idleRotY + UnityEngine.Random.Range(0, 360), idleRotZ + UnityEngine.Random.Range(0, 360)), RotationSpeed * Time.deltaTime);
+        }
+
+        float step = speed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(Target.transform.position.x + 3, Target.transform.position.y, Target.transform.position.z), step);
     }
 
     private void Dieing()

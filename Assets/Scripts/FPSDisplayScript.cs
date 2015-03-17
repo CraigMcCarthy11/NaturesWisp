@@ -53,13 +53,6 @@ public class FPSDisplayScript : MonoBehaviour
             string format = System.String.Format("FPS: {0:F2} ", fps);
             textField.text = format;
 
-            if (fps < 30)
-                textField.material.color = Color.yellow;
-            else
-                if (fps < 10)
-                    textField.material.color = Color.red;
-                else
-                    textField.material.color = Color.green;
             //	DebugConsole.Log(format,level);
             timeleft = updateInterval;
             accum = 0.0F;

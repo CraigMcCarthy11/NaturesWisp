@@ -27,7 +27,8 @@ public class Biome : MonoBehaviour
     public List<GameObject> Neighbors = new List<GameObject>();
     public List<GameObject> myWisps = new List<GameObject>();
     public int numberOfStartingWisps;
-    public int angerValue = 40;
+    public int angerValue = 0;
+    public float angerRefreshRate = 2f;
 
     //Private
     private int numberOfNeighborsToHave = 8;
@@ -35,6 +36,86 @@ public class Biome : MonoBehaviour
     private int MIN_STARTING_WISPS = 4;
     private int MAX_STARTING_HEALTH = 110;
     private int MIN_STARTING_HEALTH = 80;
+    private float timer = 1f;
+    
+
+
+
+    void Update()
+    {
+        //Every one secound check to, increase rage
+        timer -= Time.deltaTime;
+        if (timer < 0)
+        {
+            timer = angerRefreshRate;
+            foreach(GameObject biome in Neighbors)
+            {
+                try
+                {
+                    //if we are surrounded by an enemy
+                    if (GetComponent<Faction>().isEnemyOrFoe(biome))
+                    {
+                        //increase anger
+                        angerValue++;
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                }
+            }
+        }
+
+        if(angerValue >= 100)
+        {
+            StartWar();
+            angerValue = -400;
+        }
+    }
+
+    public void StartWar()
+    {
+        //We do this so everyone doesn't rage at once
+        if(GameManager.CurrentRagers.Count >= GameManager.MAX_NUM_OF_RAGERS)
+        {
+            angerValue = -200;
+            return;
+        }
+
+        GameManager.CurrentRagers.Add(this.gameObject);
+            
+        //Show we are starting war
+        Instantiate(UsefulPrefabs.instance.RageHalo, this.transform.position, Quaternion.identity);
+        //Prepare to store all neibors that are enemies
+        List<GameObject> potentialEneimes = new List<GameObject>();
+        //loop
+        foreach (GameObject biome in Neighbors)
+        {
+            try
+            {
+                //if they are an enemy
+                if (GetComponent<Faction>().isEnemyOrFoe(biome))
+                {
+                    //add
+                    potentialEneimes.Add(biome);
+                }
+            }
+            catch (System.Exception ex)
+            {
+            }
+        }
+
+        //Grab a random enemy
+        if (potentialEneimes.Count != 0) //We do this check because we might be surrounded by no enemies.
+        {
+            GameObject EnemyToAttack = potentialEneimes[UnityEngine.Random.Range(1, potentialEneimes.Count)];
+
+            foreach(GameObject wisp in myWisps)
+            {
+                wisp.GetComponent<Wisp>().Target = EnemyToAttack;
+                wisp.GetComponent<Wisp>().myAction = Wisp.Action.Fighting;
+            }
+        }
+    }
 
     /// <summary>
     /// This fucntion generates data that will be asigned to this script when its instantiated 
@@ -47,6 +128,8 @@ public class Biome : MonoBehaviour
         uiManager.GetBiomesInit(myFaction);
         numberOfStartingWisps = UnityEngine.Random.Range(MIN_STARTING_WISPS, MAX_STARTING_WISPS);
         health = UnityEngine.Random.Range(MIN_STARTING_HEALTH, MAX_STARTING_HEALTH);
+        //this.angerValue = UnityEngine.Random.Range(-50, -100);
+        this.angerValue = 1;
     }
 
     /// <summary>
@@ -127,25 +210,11 @@ public class Biome : MonoBehaviour
         try
         {
             List<GameObject> TempNeighbors = new List<GameObject>(GameManager.MapAnchors);
-            GameManager.MapAnchors.Sort(SortByDistance);
+            TempNeighbors.Sort(SortByDistance);
             //Sort the top 5 (closest) in the list as Neighbors NOTE: Skipping the first one in the list because it myself
             for (int i = 0; i < numberOfNeighborsToHave; i++)
             {
-                    Neighbors.Add(TempNeighbors[i]);
-                    Debug.Log("Added Neighbor: " + this.gameObject.name);
-                Debug.Log("# of waypoints: " + Neighbors.Count);
-                    /*
-                    //if this gameobjects Neighbor is a enemy
-                    try
-                    {
-                        //if (this.gameObject.GetComponent<Faction>().isEnemyOrFoe(TempNeighbors[i]))
-                        //angerValue += 10;
-                    }
-                    catch (System.Exception ex)
-                    {
-                        Debug.LogError("[SELF] Error finding foe on: " + GameManager.MapAnchors[i + 1].name + " because: " + ex);
-                    }
-                     */
+                Neighbors.Add(TempNeighbors[i]);
             }
         }
         catch (System.Exception ex)

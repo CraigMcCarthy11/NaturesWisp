@@ -5,6 +5,8 @@ public class UsefulPrefabs : MonoBehaviour
 {
     private static UsefulPrefabs gInstance;
 
+    public GameObject RageHalo;
+
     /// <summary>
     /// Constructor that handles getting ang setting the instaance
     /// this is using the singleton pattern

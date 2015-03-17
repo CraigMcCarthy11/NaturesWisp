@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     public Dictionary<Faction.FactionTypes, Faction> FactionsMasterDic = new Dictionary<Faction.FactionTypes, Faction>();
     public GameObject[] WispHaloPrefabs;
     public AudioManager audioMan;
+    public static int MAX_NUM_OF_RAGERS = 5;
+
+    public static List<GameObject> CurrentRagers = new List<GameObject>();
+
     //GameObjects
     public GameObject WispPrefab;
     public List<GameObject> BiomePrefabs = new List<GameObject>();
@@ -93,7 +97,7 @@ public class GameManager : MonoBehaviour
 
         //Create and add to master list
         Faction Woodland = new Faction();
-        Woodland.InitFaction(Faction.FactionTypes.Woodland, ArcticEnemies, ArcticsAllies);
+        Woodland.InitFaction(Faction.FactionTypes.Woodland, WoodlandEnemies, WoodlandAllies);
         FactionsMasterDic.Add(Faction.FactionTypes.Woodland, Woodland);
         #endregion
 

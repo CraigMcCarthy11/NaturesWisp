@@ -361,6 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4b3352310038184091799b5baa0261e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RageHalo: {fileID: 162856, guid: 8a51d5e1eb6c27d4f824c6fe289ba97c, type: 2}
 --- !u!114 &149285070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d908eee5d0f2a86448219580f355d20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updateInterval: .100000001
+  updateInterval: .5
   textField: {fileID: 1253705801}
 --- !u!114 &191872051
 MonoBehaviour:
