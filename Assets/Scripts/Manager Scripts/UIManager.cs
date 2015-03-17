@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
 	public GameObject bombsLeft;
 	public GameObject swapsLeft;
     public GameObject powerupTextTimers;
+    public GameObject funFactText;
 
     //Button Prefabs
     public GameObject WispButtonPrefab;
@@ -33,6 +34,7 @@ public class UIManager : MonoBehaviour
     private float swapTimer;
     private float bombTimer;
     private float overallTimer;
+    private List<string> funFacts = new List<string>();
 
 	public int bombsCount = 2;
 	public int extraWispsCount = 5;
@@ -42,6 +44,8 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         biomeCountsText = biomeCounts.GetComponentInChildren<Text>();
+        funFactSetting();
+        funFactText.GetComponentInChildren<Text>().text = funFacts[UnityEngine.Random.Range(0, funFacts.Capacity)];
     }
 
     // Update is called once per frame
@@ -67,6 +71,7 @@ public class UIManager : MonoBehaviour
     {
         if (wispTimer >= 30)
         {
+            funFactText.GetComponentInChildren<Text>().text = funFacts[UnityEngine.Random.Range(0, funFacts.Capacity)];
             extraWispsCount++;
             wispTimer = 0;
         }
@@ -98,5 +103,16 @@ public class UIManager : MonoBehaviour
                 woodlandCount++;
                 break;
         }
+    }
+    void funFactSetting()
+    {
+        funFacts.Add("When lightning strikes it can reach up to 30,000 degrees celsius (54,000 degrees fahrenheit)");
+        funFacts.Add("The only continent with no active volcanoes is Australia");
+        funFacts.Add("The Amazon rainforest produces half the world's oxygen supply");
+        funFacts.Add("The Great Barrier Reef in Australia is the world’s largest reef system.");
+        funFacts.Add("Around 75% of the volcanoes on Earth are found in the Pacific Ring of Fire, an area around the Pacific Ocean where tectonic plates meet.");
+        funFacts.Add("About 75% of increase in CO2 levels from humans in the last 20 years is from the burning of fuels. The rest is made up largely of land use changes such as deforestation.");
+        funFacts.Add("85% of plant life is found in the ocean and");
+        funFacts.Add("Our earth is moving around the sun at 67,000 miles (107,826 km) per hour.");
     }
 }
