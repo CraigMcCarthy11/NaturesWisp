@@ -141,18 +141,27 @@ public class GameManager : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit; if (Physics.Raycast(ray, out hit))
             {
-                Destroy(hit.transform.gameObject);
+                if (hit.transform.gameObject.name != "TileMap")
+                {
+                    Biome biome = hit.transform.gameObject.GetComponent<Biome>();
+                    Destroy(hit.transform.gameObject);
+                }
             }
             uiManager.bombsCount--;
             bombBool = false;
         }
         if (Input.GetMouseButtonDown(0) && wispAddBool == true && uiManager.extraWispsCount > 0)
         {
-            /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit; if (Physics.Raycast(ray, out hit))
             {
-                Destroy(hit.transform.gameObject);
-            }*/
+                if (hit.transform.gameObject.name != "TileMap")
+                {
+                    Biome biome = hit.transform.gameObject.GetComponent<Biome>();
+                    biome.numberOfStartingWisps++;
+                }
+            }
+
             uiManager.extraWispsCount--;
             wispAddBool = false;
         }

@@ -111,7 +111,7 @@ public class UIManager : MonoBehaviour
         funFacts.Add("The Amazon rainforest produces half the world's oxygen supply");
         funFacts.Add("The Great Barrier Reef in Australia is the world’s largest reef system.");
         funFacts.Add("Around 75% of the volcanoes on Earth are found in the Pacific Ring of Fire, an area around the Pacific Ocean where tectonic plates meet.");
-        funFacts.Add("About 75% of increase in CO2 levels from humans in the last 20 years is from the burning of fuels. The rest is made up largely of land use changes such as deforestation.");
+        funFacts.Add("About 75% of increase in CO2 levels from humans in the last 20 years is from the burning of fuels. The rest is largely deforestation.");
         funFacts.Add("85% of plant life is found in the ocean and");
         funFacts.Add("Our earth is moving around the sun at 67,000 miles (107,826 km) per hour.");
     }
